@@ -1,0 +1,32 @@
+<!doctype html><meta charset="utf-8">
+<style>body{margin:0;font:14px monospace;background:#fff}
+#out{white-space:pre-wrap;padding:10px;background:#111;color:#0f0}
+iframe{border:2px solid red;display:block}</style>
+<div id="out">đang tải...</div>
+<iframe id="f" src="../index.html?mc=1" width="375" height="4400"></iframe>
+<script>
+var f = document.getElementById('f');
+f.onload = function(){
+  (function(){
+    try {
+      var d = f.contentDocument;
+      var vw = f.clientWidth;
+      var scrollW = d.documentElement.scrollWidth;
+      var bodyScrollW = d.body.scrollWidth;
+      var overflow = [];
+      d.querySelectorAll('body *').forEach(function(el){
+        var r = el.getBoundingClientRect();
+        if (r.right > vw + 1 || r.left < -1) {
+          overflow.push(el.tagName + '.' + (el.className && el.className.toString ? el.className.toString().split(' ').join('.') : '') +
+            ' left=' + Math.round(r.left) + ' right=' + Math.round(r.right) + ' w=' + Math.round(r.width));
+        }
+      });
+      document.getElementById('out').textContent =
+        'viewport=' + vw + ' scrollWidth=' + scrollW + ' bodyScrollWidth=' + bodyScrollW +
+        '\noverflow count=' + overflow.length + '\n' + overflow.slice(0,40).join('\n');
+    } catch(e) {
+      document.getElementById('out').textContent = 'ERROR: ' + e.message;
+    }
+  })();
+};
+</script>
