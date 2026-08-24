@@ -378,6 +378,7 @@ button,input{font:inherit;color:inherit}
   transition:transform .3s;
 }
 .hero__phone:hover .hero__phone-ic{transform:rotate(-12deg) scale(1.06)}
+.hero__cta .hero__hotline{display:none}
 
 /* ---------- Buttons ---------- */
 .btn{
@@ -917,8 +918,8 @@ textarea.field__input{resize:vertical;min-height:78px;line-height:1.45;padding-t
   .hero__feats{gap:10px 0}
   .feat{flex:0 0 50%;padding:6px 12px;border-right:0}
   .feat__ic{font-size:26px}
-  .hero__phone{font-size:26px}
-  .hero__phone-ic{width:38px;height:38px;font-size:19px}
+  .hero__phone{display:none}
+  .hero__cta .hero__hotline{display:flex}
   .btn--gold{font-size:16px;padding:10px 22px}
   .fleet{grid-template-columns:1fr}
   .fleet__item:first-child{border-right:0;border-bottom:1px solid rgba(216,164,65,.4)}
@@ -976,7 +977,9 @@ textarea.field__input{resize:vertical;min-height:78px;line-height:1.45;padding-t
   .hero__logo{height:70%;max-width:60%}
   .feat{flex:0 0 50%;padding:6px 8px;border-right:0}
   .feat__ic{font-size:24px}
-  .hero__phone{font-size:22px}
+  .hero__hotline{padding:6px 14px}
+  .hero__hotline .hotline__label{font-size:10px}
+  .hero__hotline .hotline__num{font-size:20px}
   .brand__name{font-size:21px}
   .topbar__title{font-size:13px}
 }
