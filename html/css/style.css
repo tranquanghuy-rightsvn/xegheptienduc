@@ -378,6 +378,7 @@ button,input{font:inherit;color:inherit}
   transition:transform .3s;
 }
 .hero__phone:hover .hero__phone-ic{transform:rotate(-12deg) scale(1.06)}
+.hero__cta .hero__hotline{display:none}
 
 /* ---------- Buttons ---------- */
 .btn{
@@ -533,6 +534,21 @@ button,input{font:inherit;color:inherit}
 .field__input:focus{outline:0;border-color:var(--gold);box-shadow:0 0 0 3px rgba(216,164,65,.18)}
 .field__input.is-error{border-color:#c0392b;box-shadow:0 0 0 3px rgba(192,57,43,.12)}
 
+/* ---------- Gợi ý địa điểm (autocomplete) ---------- */
+.field__autocomplete{position:relative}
+.autocomplete-list{
+  position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:30;
+  max-height:240px;overflow-y:auto;margin:0;padding:6px;list-style:none;
+  background:#fff;border:1px solid #dcd8d0;border-radius:10px;
+  box-shadow:0 12px 28px rgba(0,43,23,.18);
+}
+.autocomplete-item{
+  padding:9px 12px;border-radius:6px;font-size:12.5px;line-height:1.4;
+  font-weight:500;color:#16281d;cursor:pointer;transition:background-color .15s;
+}
+.autocomplete-item:hover,.autocomplete-item.is-active{background:#faf1de}
+.autocomplete-msg{padding:9px 12px;font-size:12.5px;color:var(--muted);font-style:italic}
+
 .booking__msg{
   font-size:12.5px;font-weight:600;text-align:center;color:var(--gold-l);
 }
@@ -558,6 +574,70 @@ button,input{font:inherit;color:inherit}
   line-height:1.25;letter-spacing:.4px;color:var(--ink);
 }
 .route-card__name span{display:block;font-weight:600;font-size:14px;line-height:1.3;color:var(--muted)}
+
+/* =====================================================================
+   BẢNG GIÁ XE
+   ===================================================================== */
+.section--price{
+  margin:14px 0;padding:34px 0 32px;
+  background:linear-gradient(180deg,#05381c 0%,#002c15 30%,#002a14 100%);
+  border-top:3px solid var(--gold);border-bottom:3px solid var(--gold);
+}
+.section--price .sec-title{color:var(--gold-l)}
+
+.price-sub{
+  text-align:center;margin:16px 0 28px;font-size:15px;font-weight:600;color:var(--gold-d);
+}
+.section--price .price-sub{color:var(--gold-soft)}
+
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:19px}
+.price-card{
+  position:relative;margin-top:0;padding:8px 14px 16px;height:172px;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r-card);
+  box-shadow:var(--shadow);text-align:center;
+  transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease;
+}
+.price-card:hover{transform:translateY(-6px);box-shadow:0 14px 28px rgba(0,43,23,.14);border-color:var(--gold)}
+.price-card__title{
+  margin:28px 0 0;
+  font-family:var(--ff-head);font-weight:700;font-size:15px;line-height:1.25;
+  letter-spacing:.3px;color:var(--ink);
+}
+.price-card__amount{
+  margin-top:6px;font-family:var(--ff-head);font-weight:800;font-size:23px;
+  letter-spacing:.3px;color:var(--gold-d);
+}
+.price-card__amount span{margin-left:2px;font-size:14px;font-weight:700;color:var(--muted)}
+.price-card__desc{
+  margin-top:6px;padding:0 4px;
+  font-size:13px;line-height:1.44;color:var(--muted);font-weight:500;
+}
+.price-card--pro{border-color:var(--gold);box-shadow:0 8px 22px rgba(0,43,23,.14)}
+.section--price .price-card{box-shadow:0 10px 26px rgba(0,0,0,.32)}
+.section--price .price-card--pro{box-shadow:0 12px 30px rgba(0,0,0,.38)}
+.section--price .notice{box-shadow:0 10px 26px rgba(0,0,0,.32)}
+.price-card__flag{
+  display:inline-block;margin-top:26px;padding:3px 14px;border-radius:999px;
+  background:linear-gradient(180deg,#f7d78f 0%,#e3b155 48%,#c48c1e 100%);
+  font-family:var(--ff-head);font-weight:700;font-size:10.5px;letter-spacing:.8px;
+  color:#0d2f19;box-shadow:0 2px 6px rgba(0,0,0,.2);
+}
+.price-card--pro .price-card__title{margin-top:6px}
+
+.notice{
+  margin-top:28px;padding:14px 20px 16px;
+  background:var(--card);border:1px solid var(--line);border-left:4px solid var(--gold);
+  border-radius:var(--r-card);box-shadow:var(--shadow);
+}
+.notice__head{display:flex;align-items:center;gap:10px}
+.notice__ic{font-size:22px;color:var(--gold-d)}
+.notice__title{
+  font-family:var(--ff-head);font-weight:700;font-size:15px;letter-spacing:.5px;
+  color:var(--ink);text-transform:uppercase;
+}
+.notice__text{margin-top:6px;font-size:13.5px;line-height:1.5;color:var(--muted);font-weight:500}
+.notice__text b{color:var(--ink);font-weight:700}
 
 /* =====================================================================
    LỜI CHÀO + VÌ SAO
@@ -686,6 +766,114 @@ button,input{font:inherit;color:inherit}
 .callnow__label{font-family:var(--ff-head);font-weight:800;font-size:13px;letter-spacing:.3px}
 
 /* =====================================================================
+   TRANG CON — page hero band (dùng cho các trang trong /lien-he, v.v.)
+   ===================================================================== */
+.page-hero{
+  text-align:center;padding:38px 0 32px;
+  background:linear-gradient(180deg,#00351a 0%,#002c15 55%,#002612 100%);
+  border-bottom:3px solid var(--gold);
+}
+.page-hero__crumb{
+  font-family:var(--ff-head);font-weight:600;font-size:12px;letter-spacing:1.2px;
+  color:var(--gold-soft);text-transform:uppercase;
+}
+.page-hero__crumb a{transition:color .22s}
+.page-hero__crumb a:hover{color:var(--gold-l)}
+.page-hero__title{
+  margin-top:6px;font-family:var(--ff-head);font-weight:800;font-size:32px;
+  letter-spacing:.6px;color:var(--gold-l);text-transform:uppercase;
+}
+.page-hero .ornament{margin:8px auto}
+.page-hero__desc{
+  max-width:620px;margin:0 auto;font-size:14px;line-height:1.6;
+  color:var(--on-dark-2);font-weight:500;
+}
+
+/* ---------- Form liên hệ: ô nhập nhiều dòng ---------- */
+.field--area{align-items:flex-start}
+.field--area .field__label{padding-top:6px}
+textarea.field__input{resize:vertical;min-height:78px;line-height:1.45;padding-top:7px}
+
+/* ---------- Danh sách thông tin liên hệ (trong .card) ---------- */
+.contact-list{display:flex;flex-direction:column;gap:13px;margin-top:2px}
+.contact-list li{display:flex;align-items:flex-start;gap:12px}
+.contact-list b{
+  display:block;font-family:var(--ff-head);font-weight:700;font-size:13.5px;
+  color:var(--ink);margin-bottom:1px;
+}
+.contact-list span,.contact-list a{font-size:13px;line-height:1.5;color:var(--muted);font-weight:500}
+.contact-list a:hover{color:var(--gold-d)}
+
+/* ---------- Bản đồ Google Maps ---------- */
+.map-frame{
+  margin-top:14px;border:1.5px solid var(--gold);border-radius:var(--r-panel);
+  overflow:hidden;box-shadow:var(--shadow);line-height:0;
+}
+.map-frame iframe{width:100%;height:360px;border:0;display:block}
+
+/* ---------- Tin tức: lưới bài viết ---------- */
+.news-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:24px}
+.news-grid--related{grid-template-columns:repeat(3,1fr);margin-top:20px}
+.news-card{
+  display:flex;flex-direction:column;background:var(--card);
+  border:1px solid var(--line);border-radius:var(--r-card);
+  box-shadow:var(--shadow);overflow:hidden;
+  transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease;
+}
+.news-card:hover{transform:translateY(-6px);box-shadow:0 14px 28px rgba(0,43,23,.14);border-color:var(--gold)}
+.news-card__img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.news-card__body{display:flex;flex-direction:column;flex:1;padding:18px 20px 20px}
+.news-card__meta{
+  font-family:var(--ff-head);font-weight:700;font-size:11px;letter-spacing:.8px;
+  color:var(--gold-d);text-transform:uppercase;margin-bottom:8px;
+}
+.news-card__title{
+  font-family:var(--ff-head);font-weight:700;font-size:17px;line-height:1.32;
+  color:var(--ink);margin-bottom:8px;
+}
+.news-card__desc{font-size:13.5px;line-height:1.6;color:var(--muted);font-weight:500;flex:1;margin-bottom:14px}
+.news-card__link{
+  display:inline-flex;align-items:center;gap:6px;align-self:flex-start;
+  font-family:var(--ff-head);font-weight:700;font-size:12.5px;letter-spacing:.4px;
+  color:var(--gold-d);text-transform:uppercase;transition:gap .22s,color .22s;
+}
+.news-card__link .ic{font-size:13px;transition:transform .22s}
+.news-card:hover .news-card__link{color:var(--ink)}
+.news-card:hover .news-card__link .ic{transform:translateX(3px)}
+
+/* ---------- Chi tiết bài viết ---------- */
+.article{max-width:800px;margin:0 auto}
+.article__cover{
+  width:100%;aspect-ratio:16/8;object-fit:cover;
+  border-radius:var(--r-card);border:1px solid var(--line);box-shadow:var(--shadow);
+  margin-bottom:26px;
+}
+.article__body{font-size:15px;line-height:1.85;color:var(--ink-2);font-weight:500}
+.article__body p{margin-bottom:16px}
+.article__body h2{
+  font-size:20px;line-height:1.3;color:var(--ink);margin:26px 0 12px;letter-spacing:.2px;
+}
+.article__body ul{margin:0 0 16px;display:flex;flex-direction:column;gap:8px}
+.article__body ul li{display:flex;align-items:flex-start;gap:10px}
+.article__body ul li .ic{font-size:15px;color:#1e8f4e;margin-top:4px;flex:none}
+.article__body strong{color:var(--ink);font-weight:700}
+
+.article__cta{
+  margin-top:32px;padding:22px 24px;text-align:center;
+  background:linear-gradient(180deg,#05381c 0%,#002c15 30%,#002a14 100%);
+  border:1.5px solid var(--gold);border-radius:var(--r-panel);
+}
+.article__cta h3{font-family:var(--ff-head);font-weight:800;font-size:18px;color:var(--gold-l);margin-bottom:6px}
+.article__cta p{font-size:13.5px;color:var(--on-dark-2);font-weight:500;margin-bottom:14px}
+.article__cta .btn{display:inline-flex}
+
+.article__related{margin-top:40px}
+.article__related h3{
+  font-family:var(--ff-head);font-weight:800;font-size:18px;letter-spacing:.4px;
+  color:var(--ink);text-transform:uppercase;margin-bottom:4px;text-align:center;
+}
+
+/* =====================================================================
    RESPONSIVE
    ===================================================================== */
 @media (max-width:1200px){
@@ -696,6 +884,7 @@ button,input{font:inherit;color:inherit}
   .feat{padding:0 18px}
   .feat__text b{font-size:17px}
   .sec-title{font-size:26px}
+  .page-hero__title{font-size:28px}
 }
 
 @media (max-width:1024px){
@@ -703,6 +892,8 @@ button,input{font:inherit;color:inherit}
   .hero__logo{max-width:38%}
   .svc-grid{grid-template-columns:repeat(3,1fr);gap:30px 18px}
   .route-grid{grid-template-columns:repeat(2,1fr)}
+  .price-grid{grid-template-columns:repeat(2,1fr);gap:24px 18px}
+  .news-grid--related{grid-template-columns:repeat(2,1fr)}
   .duo,.duo--even{grid-template-columns:1fr}
   .field{grid-template-columns:170px 1fr}
   .foot{grid-template-columns:1fr 1fr;gap:26px}
@@ -712,7 +903,8 @@ button,input{font:inherit;color:inherit}
 
 @media (max-width:900px){
   .topbar__inner{flex-wrap:wrap;justify-content:center;text-align:center;gap:14px;padding:14px 0}
-  .topbar__title{order:3;flex-basis:100%;font-size:16px}
+  .topbar__title{order:-1;flex-basis:100%;font-size:16px}
+  .topbar .hotline{display:none}
   .mainnav__inner{flex-direction:column;align-items:stretch}
   .nav-toggle{display:flex;align-self:flex-start}
   .navlist{
@@ -726,8 +918,8 @@ button,input{font:inherit;color:inherit}
   .hero__feats{gap:10px 0}
   .feat{flex:0 0 50%;padding:6px 12px;border-right:0}
   .feat__ic{font-size:26px}
-  .hero__phone{font-size:26px}
-  .hero__phone-ic{width:38px;height:38px;font-size:19px}
+  .hero__phone{display:none}
+  .hero__cta .hero__hotline{display:flex}
   .btn--gold{font-size:16px;padding:10px 22px}
   .fleet{grid-template-columns:1fr}
   .fleet__item:first-child{border-right:0;border-bottom:1px solid rgba(216,164,65,.4)}
@@ -758,7 +950,14 @@ button,input{font:inherit;color:inherit}
   .svc-card__title{font-size:16px}
   .svc-card__desc{font-size:13px}
   .route-card__name{font-size:16px}
+  .price-grid{grid-template-columns:repeat(2,1fr);gap:32px 14px}
   .sec-title{font-size:22px}
+  .page-hero{padding:28px 0 24px}
+  .page-hero__title{font-size:22px}
+  .map-frame iframe{height:260px}
+  .news-grid,.news-grid--related{grid-template-columns:1fr}
+  .article__body{font-size:14px}
+  .article__cover{aspect-ratio:16/10}
   .card__title,.panel__title{font-size:19px}
   .field{grid-template-columns:1fr;gap:5px;padding:5px 0}
   .fleet__desc{max-width:58%}
@@ -774,10 +973,13 @@ button,input{font:inherit;color:inherit}
 @media (max-width:420px){
   .svc-grid{grid-template-columns:1fr;gap:36px 0}
   .route-grid{grid-template-columns:1fr}
+  .price-grid{grid-template-columns:1fr;gap:32px 0}
   .hero__logo{height:70%;max-width:60%}
   .feat{flex:0 0 50%;padding:6px 8px;border-right:0}
   .feat__ic{font-size:24px}
-  .hero__phone{font-size:22px}
+  .hero__hotline{padding:6px 14px}
+  .hero__hotline .hotline__label{font-size:10px}
+  .hero__hotline .hotline__num{font-size:20px}
   .brand__name{font-size:21px}
   .topbar__title{font-size:13px}
 }

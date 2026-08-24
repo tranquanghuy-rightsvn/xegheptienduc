@@ -1,415 +1,944 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nhà Xe Tiến Đức Hạ Long - Xe Ghép Hạ Long <=> Hải Phòng</title>
-<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
-<link rel="icon" type="image/png" sizes="48x48" href="images/favicon-48.png">
-<link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
-<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-<link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nhà Xe Tiến Đức Hạ Long - Xe Ghép Hạ Long <=> Hải Phòng</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="images/favicon-16.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="images/favicon-32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="48x48"
+      href="images/favicon-48.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="images/favicon-192.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="images/apple-touch-icon.png"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- ============ SVG ICON SPRITE ============ -->
+    <svg
+      class="svg-sprite"
+      aria-hidden="true"
+      focusable="false"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <symbol id="i-phone" viewBox="0 0 24 24">
+        <path
+          d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1z"
+        />
+      </symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24">
+        <path
+          d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7m0 9.5A2.5 2.5 0 1 1 14.5 9 2.5 2.5 0 0 1 12 11.5"
+        />
+      </symbol>
+      <symbol id="i-plane" viewBox="0 0 24 24">
+        <path
+          d="M21 15.5v-1.9l-7.5-4.7V3.6a1.5 1.5 0 0 0-3 0v5.3L3 13.6v1.9l7.5-2.3v4.9l-2.2 1.6V21l3.7-1 3.7 1v-1.3l-2.2-1.6v-4.9z"
+        />
+      </symbol>
+      <symbol id="i-users" viewBox="0 0 24 24">
+        <path
+          d="M9 11a3 3 0 1 0-3-3 3 3 0 0 0 3 3m7 0a2.6 2.6 0 1 0-2.6-2.6A2.6 2.6 0 0 0 16 11M9 12.6c-2.3 0-6.8 1.2-6.8 3.5V19h13.6v-2.9c0-2.3-4.5-3.5-6.8-3.5m7.3.2c-.4 0-.8 0-1.2.1a4.5 4.5 0 0 1 2.1 3.2V19h5.6v-2.5c0-2.1-3.8-3.7-6.5-3.7"
+        />
+      </symbol>
+      <symbol id="i-map" viewBox="0 0 24 24">
+        <path
+          d="M14.4 2.2c-.6.9-.4 2 .2 3.1.7 1.2 1 2.1.4 3.3-.5 1-1.6 1.5-2.6 2-1.5.7-3 1.6-3.5 3.3-.4 1.4.2 2.7 1 3.8 1 1.4 2.3 2.6 3.4 3.9.5.6 1.5.4 1.6-.4.3-1.6-.3-3.1-1-4.4-.4-.8-.9-1.7-.6-2.6.3-.9 1.3-1.3 2.1-1.7 1.4-.7 2.8-1.6 3.4-3.1.7-1.9-.2-3.9-1.5-5.3a9 9 0 0 0-2.9-2.1zM8.2 6.6c-1.2.5-2.3 1.4-2.7 2.7-.4 1.2 0 2.4.7 3.4.4.6 1.4.3 1.5-.4.1-1 .1-2 .6-2.9.4-.8 1-1.6.7-2.5-.2-.4-.5-.5-.8-.3"
+        />
+      </symbol>
+      <symbol id="i-palm" viewBox="0 0 24 24">
+        <path
+          d="M11.2 8.7 9.4 21h2.1l1.1-9.9zM12 2c-1.9 0-3.5 1-4.3 2.5 1.3-.7 2.9-.6 4.1.3-1.9-.2-3.7.8-4.6 2.5 1.4-.9 3.2-1 4.7-.2-1.3.5-2.4 1.6-2.9 3 1.1-1 2.6-1.5 4-1.3-.4-1 .1-2 1-2.6-1.1-.2-2-1-2.2-2.1.9.5 2 .5 2.9 0-.5 1 .2 2.2 1.3 2.5.9.2 1.9-.2 2.4-1-.1 1.4.7 2.7 2 3.2-.6-1.5-.5-3.2.3-4.6-1.4.6-3 .3-4.1-.7A4.7 4.7 0 0 0 12 2M5 21h14v-1.4c-2.1-1-4.5-1.5-7-1.5s-4.9.5-7 1.5z"
+        />
+      </symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24">
+        <path
+          d="M12 2 4 5.3v6c0 5 3.4 9.7 8 10.7 4.6-1 8-5.7 8-10.7v-6zm-1 14-4-4 1.4-1.4L11 13.2l4.6-4.6L17 10z"
+        />
+      </symbol>
+      <symbol id="i-leaf" viewBox="0 0 24 24">
+        <path
+          d="M20 3s-9-1-13.5 3.5S3.3 18 3.3 18l-1.6 1.6 1.4 1.4L4.7 19.5S8.7 22 13.2 17.5 20 3 20 3M8.5 15.5c2-4.5 6-7.5 6-7.5-3.3 1-6.4 3.6-8.2 7.1z"
+        />
+      </symbol>
+      <symbol id="i-hands" viewBox="0 0 24 24">
+        <path
+          d="M2.5 9.8 6 6.4l3.2 1.9 2.5-.8 2.6.8L17.9 6l3.6 3.5-3 3.4-1.7-1-3.3 3.2a1.4 1.4 0 0 1-2 0l-.5-.5-.9.9a1.4 1.4 0 0 1-2 0l-.6-.6-.6.5a1.3 1.3 0 0 1-1.9 0l-.4-.4 1.9-1.9-1.2-1.1zm8.4 8.4 1.6 1.6a1.3 1.3 0 0 0 1.9 0l.5-.5.5.5a1.3 1.3 0 0 0 2-1.8l-3.4-3.4z"
+        />
+      </symbol>
+      <symbol id="i-globe" viewBox="0 0 24 24">
+        <path
+          d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2m6.9 6h-2.9a15.6 15.6 0 0 0-1.4-3.6A8 8 0 0 1 18.9 8M12 4.1A14 14 0 0 1 13.9 8h-3.8A14 14 0 0 1 12 4.1M4.3 14a7.8 7.8 0 0 1 0-4h3.3a16.5 16.5 0 0 0 0 4zm.8 2h2.9a15.6 15.6 0 0 0 1.4 3.6A8 8 0 0 1 5.1 16m2.9-8H5.1a8 8 0 0 1 4.3-3.6A15.6 15.6 0 0 0 8 8m4 11.9A14 14 0 0 1 10.1 16h3.8A14 14 0 0 1 12 19.9m2.3-5.9H9.7a14.7 14.7 0 0 1 0-4h4.6a14.7 14.7 0 0 1 0 4m.3 5.6A15.6 15.6 0 0 0 16 16h2.9a8 8 0 0 1-4.3 3.6m1.8-5.6a16.5 16.5 0 0 0 0-4h3.3a7.8 7.8 0 0 1 0 4z"
+        />
+      </symbol>
+      <symbol id="i-calendar" viewBox="0 0 24 24">
+        <path
+          d="M19 3h-1V1h-2v2H8V1H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2m0 16H5V9h14zm0-12H5V5h14z"
+        />
+        <path d="M7 11h4v4H7z" />
+      </symbol>
+      <symbol id="i-user" viewBox="0 0 24 24">
+        <path
+          d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5m0 2c-3.3 0-9 1.7-9 5v3h18v-3c0-3.3-5.7-5-9-5"
+        />
+      </symbol>
+      <symbol id="i-send" viewBox="0 0 24 24">
+        <path d="M2.5 20.5 22 12 2.5 3.5 2.5 10l14 2-14 2z" />
+      </symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24">
+        <path
+          d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2m0 4-8 5-8-5V6l8 5 8-5z"
+        />
+      </symbol>
+      <symbol id="i-chat" viewBox="0 0 24 24">
+        <path
+          d="M12 3C6.9 3 2.8 6.4 2.8 10.6c0 2.4 1.4 4.6 3.5 6L5.4 20l3.9-2a11 11 0 0 0 2.7.3c5.1 0 9.2-3.4 9.2-7.7S17.1 3 12 3"
+        />
+      </symbol>
+      <symbol id="i-check" viewBox="0 0 24 24">
+        <path
+          d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2m-1.4 14.6L6 12l1.4-1.4 3.2 3.1 6-6L18 9.1z"
+        />
+      </symbol>
+      <symbol id="i-car" viewBox="0 0 24 24">
+        <path
+          d="M18.9 6a1.5 1.5 0 0 0-1.4-1H6.5A1.5 1.5 0 0 0 5.1 6L3 12v8a1 1 0 0 0 1 1h1.5a1 1 0 0 0 1-1v-1h11v1a1 1 0 0 0 1 1H20a1 1 0 0 0 1-1v-8zM6.8 7h10.4l1.4 4H5.4zM6.5 16.5A1.5 1.5 0 1 1 8 15a1.5 1.5 0 0 1-1.5 1.5m11 0A1.5 1.5 0 1 1 19 15a1.5 1.5 0 0 1-1.5 1.5"
+        />
+      </symbol>
+      <symbol id="i-tie" viewBox="0 0 24 24">
+        <path
+          d="M12 2a3.5 3.5 0 1 0 3.5 3.5A3.5 3.5 0 0 0 12 2m-2.6 8L12 12.4 14.6 10a9 9 0 0 1 6.4 8.6V22H3v-3.4A9 9 0 0 1 9.4 10m2.6 4.2-1.4 1.6.8 5.2h1.2l.8-5.2z"
+        />
+      </symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24">
+        <path
+          d="M12 3a9 9 0 1 0 9 9 9 9 0 0 0-9-9m1 9.6-3.6 2.4-.8-1.3 3.4-2.2V6.5h1zM5.6 1.8 7 3.2 3.2 6.3 1.9 4.9zm12.8 0 3.7 3.1L20.8 6.3 17 3.2z"
+        />
+      </symbol>
+      <symbol id="i-dollar" viewBox="0 0 24 24">
+        <path
+          d="M12.9 11.1c-2.3-.6-3-1.2-3-2.1 0-1.1 1-1.8 2.7-1.8 1.7 0 2.4.8 2.4 2h2.1c0-1.7-1.1-3.2-3.1-3.7V3.5h-2.9v2c-1.9.4-3.4 1.6-3.4 3.5 0 2.3 1.9 3.4 4.6 4.1 2.5.6 3 1.4 3 2.3 0 .7-.5 1.8-2.7 1.8-2.1 0-2.9-.9-3-2.1H7.5c.1 2.1 1.7 3.3 3.6 3.7v2h2.9v-2c1.9-.4 3.5-1.5 3.5-3.5 0-2.8-2.4-3.7-4.6-4.2"
+        />
+      </symbol>
+      <symbol id="i-headset" viewBox="0 0 24 24">
+        <path
+          d="M12 2a8 8 0 0 0-8 8v6a3 3 0 0 0 3 3h1v-8H6v-1a6 6 0 0 1 12 0v1h-2v8h1.5a4.5 4.5 0 0 1-3.5 3.4V22h-2v-1.5A4 4 0 0 0 17 19a3 3 0 0 0 3-3v-6a8 8 0 0 0-8-8"
+        />
+      </symbol>
+      <symbol id="i-heart" viewBox="0 0 24 24">
+        <path
+          d="M12 21s-8.2-5-8.2-10.5A4.8 4.8 0 0 1 12 7.3a4.8 4.8 0 0 1 8.2 3.2C20.2 16 12 21 12 21"
+        />
+      </symbol>
+      <symbol id="i-fb" viewBox="0 0 24 24">
+        <path
+          d="M14 8h2.5V5H14c-2.2 0-4 1.8-4 4v2H8v3h2v7h3v-7h2.5l.5-3H13V9c0-.6.4-1 1-1"
+        />
+      </symbol>
+      <symbol id="i-tiktok" viewBox="0 0 24 24">
+        <path
+          d="M17 3h-3v12a2.6 2.6 0 1 1-2.6-2.6c.2 0 .4 0 .6.1V9.4a5.6 5.6 0 1 0 5 5.6V9.1A6.4 6.4 0 0 0 21 10.3V7.2A3.9 3.9 0 0 1 17 3"
+        />
+      </symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24">
+        <path d="m9 5 7 7-7 7-1.4-1.4L13.2 12 7.6 6.4z" />
+      </symbol>
+      <symbol id="i-bolt" viewBox="0 0 24 24">
+        <path d="M13 2 4 14h6l-1 8 9-12h-6z" />
+      </symbol>
+      <symbol id="i-hand-point" viewBox="0 0 24 24">
+        <path
+          d="M9 11V4.5a1.5 1.5 0 0 1 3 0V11h.5V5.8a1.4 1.4 0 0 1 2.8 0V11h.5V7.3a1.4 1.4 0 0 1 2.8 0v7.4A6.3 6.3 0 0 1 12.3 21h-1A5.3 5.3 0 0 1 6 15.7v-4a1.5 1.5 0 0 1 3 0z"
+        />
+      </symbol>
+      <symbol id="i-warn" viewBox="0 0 24 24">
+        <path d="M12 2 22.5 21h-21z" />
+        <rect x="11.1" y="8.5" width="1.8" height="6" fill="#012c15" />
+        <circle cx="12" cy="17" r="1" fill="#012c15" />
+      </symbol>
+      <symbol id="i-ticket" viewBox="0 0 24 24">
+        <path
+          d="M2 8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4zm8-.5v2h1.5v-2zm0 3.5v2h1.5v-2zm0 3.5v2h1.5v-2z"
+        />
+      </symbol>
+    </svg>
 
-<!-- ============ SVG ICON SPRITE ============ -->
-<svg class="svg-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
-  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1z"/></symbol>
-  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7m0 9.5A2.5 2.5 0 1 1 14.5 9 2.5 2.5 0 0 1 12 11.5"/></symbol>
-  <symbol id="i-plane" viewBox="0 0 24 24"><path d="M21 15.5v-1.9l-7.5-4.7V3.6a1.5 1.5 0 0 0-3 0v5.3L3 13.6v1.9l7.5-2.3v4.9l-2.2 1.6V21l3.7-1 3.7 1v-1.3l-2.2-1.6v-4.9z"/></symbol>
-  <symbol id="i-users" viewBox="0 0 24 24"><path d="M9 11a3 3 0 1 0-3-3 3 3 0 0 0 3 3m7 0a2.6 2.6 0 1 0-2.6-2.6A2.6 2.6 0 0 0 16 11M9 12.6c-2.3 0-6.8 1.2-6.8 3.5V19h13.6v-2.9c0-2.3-4.5-3.5-6.8-3.5m7.3.2c-.4 0-.8 0-1.2.1a4.5 4.5 0 0 1 2.1 3.2V19h5.6v-2.5c0-2.1-3.8-3.7-6.5-3.7"/></symbol>
-  <symbol id="i-map" viewBox="0 0 24 24"><path d="M14.4 2.2c-.6.9-.4 2 .2 3.1.7 1.2 1 2.1.4 3.3-.5 1-1.6 1.5-2.6 2-1.5.7-3 1.6-3.5 3.3-.4 1.4.2 2.7 1 3.8 1 1.4 2.3 2.6 3.4 3.9.5.6 1.5.4 1.6-.4.3-1.6-.3-3.1-1-4.4-.4-.8-.9-1.7-.6-2.6.3-.9 1.3-1.3 2.1-1.7 1.4-.7 2.8-1.6 3.4-3.1.7-1.9-.2-3.9-1.5-5.3a9 9 0 0 0-2.9-2.1zM8.2 6.6c-1.2.5-2.3 1.4-2.7 2.7-.4 1.2 0 2.4.7 3.4.4.6 1.4.3 1.5-.4.1-1 .1-2 .6-2.9.4-.8 1-1.6.7-2.5-.2-.4-.5-.5-.8-.3"/></symbol>
-  <symbol id="i-palm" viewBox="0 0 24 24"><path d="M11.2 8.7 9.4 21h2.1l1.1-9.9zM12 2c-1.9 0-3.5 1-4.3 2.5 1.3-.7 2.9-.6 4.1.3-1.9-.2-3.7.8-4.6 2.5 1.4-.9 3.2-1 4.7-.2-1.3.5-2.4 1.6-2.9 3 1.1-1 2.6-1.5 4-1.3-.4-1 .1-2 1-2.6-1.1-.2-2-1-2.2-2.1.9.5 2 .5 2.9 0-.5 1 .2 2.2 1.3 2.5.9.2 1.9-.2 2.4-1-.1 1.4.7 2.7 2 3.2-.6-1.5-.5-3.2.3-4.6-1.4.6-3 .3-4.1-.7A4.7 4.7 0 0 0 12 2M5 21h14v-1.4c-2.1-1-4.5-1.5-7-1.5s-4.9.5-7 1.5z"/></symbol>
-  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2 4 5.3v6c0 5 3.4 9.7 8 10.7 4.6-1 8-5.7 8-10.7v-6zm-1 14-4-4 1.4-1.4L11 13.2l4.6-4.6L17 10z"/></symbol>
-  <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M20 3s-9-1-13.5 3.5S3.3 18 3.3 18l-1.6 1.6 1.4 1.4L4.7 19.5S8.7 22 13.2 17.5 20 3 20 3M8.5 15.5c2-4.5 6-7.5 6-7.5-3.3 1-6.4 3.6-8.2 7.1z"/></symbol>
-  <symbol id="i-hands" viewBox="0 0 24 24"><path d="M2.5 9.8 6 6.4l3.2 1.9 2.5-.8 2.6.8L17.9 6l3.6 3.5-3 3.4-1.7-1-3.3 3.2a1.4 1.4 0 0 1-2 0l-.5-.5-.9.9a1.4 1.4 0 0 1-2 0l-.6-.6-.6.5a1.3 1.3 0 0 1-1.9 0l-.4-.4 1.9-1.9-1.2-1.1zm8.4 8.4 1.6 1.6a1.3 1.3 0 0 0 1.9 0l.5-.5.5.5a1.3 1.3 0 0 0 2-1.8l-3.4-3.4z"/></symbol>
-  <symbol id="i-globe" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2m6.9 6h-2.9a15.6 15.6 0 0 0-1.4-3.6A8 8 0 0 1 18.9 8M12 4.1A14 14 0 0 1 13.9 8h-3.8A14 14 0 0 1 12 4.1M4.3 14a7.8 7.8 0 0 1 0-4h3.3a16.5 16.5 0 0 0 0 4zm.8 2h2.9a15.6 15.6 0 0 0 1.4 3.6A8 8 0 0 1 5.1 16m2.9-8H5.1a8 8 0 0 1 4.3-3.6A15.6 15.6 0 0 0 8 8m4 11.9A14 14 0 0 1 10.1 16h3.8A14 14 0 0 1 12 19.9m2.3-5.9H9.7a14.7 14.7 0 0 1 0-4h4.6a14.7 14.7 0 0 1 0 4m.3 5.6A15.6 15.6 0 0 0 16 16h2.9a8 8 0 0 1-4.3 3.6m1.8-5.6a16.5 16.5 0 0 0 0-4h3.3a7.8 7.8 0 0 1 0 4z"/></symbol>
-  <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2m0 16H5V9h14zm0-12H5V5h14z"/><path d="M7 11h4v4H7z"/></symbol>
-  <symbol id="i-user" viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5m0 2c-3.3 0-9 1.7-9 5v3h18v-3c0-3.3-5.7-5-9-5"/></symbol>
-  <symbol id="i-send" viewBox="0 0 24 24"><path d="M2.5 20.5 22 12 2.5 3.5 2.5 10l14 2-14 2z"/></symbol>
-  <symbol id="i-mail" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2m0 4-8 5-8-5V6l8 5 8-5z"/></symbol>
-  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M12 3C6.9 3 2.8 6.4 2.8 10.6c0 2.4 1.4 4.6 3.5 6L5.4 20l3.9-2a11 11 0 0 0 2.7.3c5.1 0 9.2-3.4 9.2-7.7S17.1 3 12 3"/></symbol>
-  <symbol id="i-check" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2m-1.4 14.6L6 12l1.4-1.4 3.2 3.1 6-6L18 9.1z"/></symbol>
-  <symbol id="i-car" viewBox="0 0 24 24"><path d="M18.9 6a1.5 1.5 0 0 0-1.4-1H6.5A1.5 1.5 0 0 0 5.1 6L3 12v8a1 1 0 0 0 1 1h1.5a1 1 0 0 0 1-1v-1h11v1a1 1 0 0 0 1 1H20a1 1 0 0 0 1-1v-8zM6.8 7h10.4l1.4 4H5.4zM6.5 16.5A1.5 1.5 0 1 1 8 15a1.5 1.5 0 0 1-1.5 1.5m11 0A1.5 1.5 0 1 1 19 15a1.5 1.5 0 0 1-1.5 1.5"/></symbol>
-  <symbol id="i-tie" viewBox="0 0 24 24"><path d="M12 2a3.5 3.5 0 1 0 3.5 3.5A3.5 3.5 0 0 0 12 2m-2.6 8L12 12.4 14.6 10a9 9 0 0 1 6.4 8.6V22H3v-3.4A9 9 0 0 1 9.4 10m2.6 4.2-1.4 1.6.8 5.2h1.2l.8-5.2z"/></symbol>
-  <symbol id="i-clock" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9 9 9 0 0 0-9-9m1 9.6-3.6 2.4-.8-1.3 3.4-2.2V6.5h1zM5.6 1.8 7 3.2 3.2 6.3 1.9 4.9zm12.8 0 3.7 3.1L20.8 6.3 17 3.2z"/></symbol>
-  <symbol id="i-dollar" viewBox="0 0 24 24"><path d="M12.9 11.1c-2.3-.6-3-1.2-3-2.1 0-1.1 1-1.8 2.7-1.8 1.7 0 2.4.8 2.4 2h2.1c0-1.7-1.1-3.2-3.1-3.7V3.5h-2.9v2c-1.9.4-3.4 1.6-3.4 3.5 0 2.3 1.9 3.4 4.6 4.1 2.5.6 3 1.4 3 2.3 0 .7-.5 1.8-2.7 1.8-2.1 0-2.9-.9-3-2.1H7.5c.1 2.1 1.7 3.3 3.6 3.7v2h2.9v-2c1.9-.4 3.5-1.5 3.5-3.5 0-2.8-2.4-3.7-4.6-4.2"/></symbol>
-  <symbol id="i-headset" viewBox="0 0 24 24"><path d="M12 2a8 8 0 0 0-8 8v6a3 3 0 0 0 3 3h1v-8H6v-1a6 6 0 0 1 12 0v1h-2v8h1.5a4.5 4.5 0 0 1-3.5 3.4V22h-2v-1.5A4 4 0 0 0 17 19a3 3 0 0 0 3-3v-6a8 8 0 0 0-8-8"/></symbol>
-  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21s-8.2-5-8.2-10.5A4.8 4.8 0 0 1 12 7.3a4.8 4.8 0 0 1 8.2 3.2C20.2 16 12 21 12 21"/></symbol>
-  <symbol id="i-fb" viewBox="0 0 24 24"><path d="M14 8h2.5V5H14c-2.2 0-4 1.8-4 4v2H8v3h2v7h3v-7h2.5l.5-3H13V9c0-.6.4-1 1-1"/></symbol>
-  <symbol id="i-tiktok" viewBox="0 0 24 24"><path d="M17 3h-3v12a2.6 2.6 0 1 1-2.6-2.6c.2 0 .4 0 .6.1V9.4a5.6 5.6 0 1 0 5 5.6V9.1A6.4 6.4 0 0 0 21 10.3V7.2A3.9 3.9 0 0 1 17 3"/></symbol>
-  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7-1.4-1.4L13.2 12 7.6 6.4z"/></symbol>
-  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></symbol>
-  <symbol id="i-hand-point" viewBox="0 0 24 24"><path d="M9 11V4.5a1.5 1.5 0 0 1 3 0V11h.5V5.8a1.4 1.4 0 0 1 2.8 0V11h.5V7.3a1.4 1.4 0 0 1 2.8 0v7.4A6.3 6.3 0 0 1 12.3 21h-1A5.3 5.3 0 0 1 6 15.7v-4a1.5 1.5 0 0 1 3 0z"/></symbol>
-</svg>
+    <!-- ============ HEADER ============ -->
+    <header class="site-header" id="top">
+      <div class="topbar">
+        <div class="container topbar__inner">
+          <a class="brand" href="#top">
+            <img
+              class="brand__logo"
+              src="images/logo.png"
+              alt="Logo Tiến Đức"
+              width="256"
+              height="256"
+            />
+            <span class="brand__text">
+              <span class="brand__name">TIẾN ĐỨC</span>
+              <span class="brand__sub">TRANSPORT &amp; TRAVEL</span>
+            </span>
+          </a>
 
-<!-- ============ HEADER ============ -->
-<header class="site-header" id="top">
-  <div class="topbar">
-    <div class="container topbar__inner">
-      <a class="brand" href="#top">
-        <img class="brand__logo" src="images/logo.png" alt="Logo Tiến Đức" width="256" height="256">
-        <span class="brand__text">
-          <span class="brand__name">TIẾN ĐỨC</span>
-          <span class="brand__sub">TRANSPORT &amp; TRAVEL</span>
-        </span>
-      </a>
+          <p class="topbar__title">
+            CÔNG TY TNHH THƯƠNG MẠI DỊCH VỤ<br />
+            VẬN TẢI VÀ DU LỊCH TIẾN ĐỨC
+          </p>
 
-      <p class="topbar__title">
-        CÔNG TY TNHH THƯƠNG MẠI DỊCH VỤ<br>
-        VẬN TẢI VÀ DU LỊCH TIẾN ĐỨC
-      </p>
-
-      <a class="hotline" href="tel:0862933233">
-        <svg class="ic hotline__ic"><use href="#i-phone"/></svg>
-        <span class="hotline__text">
-          <span class="hotline__label">HOTLINE (24/7) - ZALO</span>
-          <span class="hotline__num">0862 933 233</span>
-        </span>
-      </a>
-    </div>
-  </div>
-
-  <nav class="mainnav" id="mainnav">
-    <div class="container mainnav__inner">
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlist">
-        <span class="nav-toggle__bars"></span>
-        <span class="nav-toggle__label">MENU</span>
-      </button>
-      <ul class="navlist" id="navlist">
-        <li><a class="is-active" href="#top">TRANG CHỦ</a></li>
-        <li><a href="#gioi-thieu">GIỚI THIỆU</a></li>
-        <li><a href="#dich-vu">DỊCH VỤ</a></li>
-        <li><a href="#doi-xe">ĐỘI XE</a></li>
-        <li><a href="#tuyen-xe">TUYẾN XE</a></li>
-        <li><a href="#bang-gia">BẢNG GIÁ</a></li>
-        <li><a href="#dat-xe">ĐẶT XE</a></li>
-        <li><a href="#tin-tuc">TIN TỨC</a></li>
-        <li><a href="#lien-he">LIÊN HỆ</a></li>
-      </ul>
-    </div>
-  </nav>
-</header>
-
-<main>
-
-<!-- ============ HERO ============ -->
-<section class="hero">
-  <div class="hero__media">
-    <img class="hero__bg" src="images/hero-banner.jpg" alt="Xe VinFast VF5 và Limo Green của Tiến Đức trên cung đường ven vịnh Hạ Long" width="2033" height="773" fetchpriority="high">
-    <img class="hero__logo" src="images/logo.png" alt="Logo Công ty TNHH Thương mại Dịch vụ Vận tải và Du lịch Tiến Đức" width="1281" height="1228" fetchpriority="high">
-  </div>
-
-  <span class="hero__arc" aria-hidden="true"></span>
-  <span class="hero__arc hero__arc--in" aria-hidden="true"></span>
-
-  <div class="hero__inner container">
-    <ul class="hero__feats">
-      <li class="feat">
-        <svg class="ic feat__ic"><use href="#i-shield"/></svg>
-        <span class="feat__text"><b>AN TOÀN</b><i>LÀ TRÊN HẾT</i></span>
-      </li>
-      <li class="feat">
-        <svg class="ic feat__ic"><use href="#i-leaf"/></svg>
-        <span class="feat__text"><b>XANH SẠCH</b><i>THÂN THIỆN</i></span>
-      </li>
-      <li class="feat">
-        <svg class="ic feat__ic"><use href="#i-hands"/></svg>
-        <span class="feat__text"><b>UY TÍN</b><i>CHẤT LƯỢNG</i></span>
-      </li>
-      <li class="feat">
-        <svg class="ic feat__ic"><use href="#i-globe"/></svg>
-        <span class="feat__text"><b>KẾT NỐI</b><i>MỌI HÀNH TRÌNH</i></span>
-      </li>
-    </ul>
-
-    <div class="hero__cta">
-      <a class="hero__phone" href="tel:0862933233">
-        <span class="hero__phone-ic"><svg class="ic"><use href="#i-phone"/></svg></span>
-        0862 933 233
-      </a>
-      <a class="btn btn--gold" href="#dat-xe">ĐẶT XE NGAY <svg class="ic"><use href="#i-arrow"/></svg></a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ DỊCH VỤ ============ -->
-<section class="section" id="dich-vu">
-  <div class="container">
-    <h2 class="sec-title">DỊCH VỤ CỦA CHÚNG TÔI</h2>
-
-    <ul class="svc-grid">
-      <li class="svc-card">
-        <span class="badge"><svg class="ic"><use href="#i-users"/></svg></span>
-        <img class="svc-card__img" src="images/svc-1-xe-ghep-tien-chuyen.jpg" alt="Xe ghép, xe tiện chuyến" width="800" height="500" loading="lazy">
-        <h3 class="svc-card__title">XE GHÉP –<br>XE TIỆN CHUYẾN</h3>
-        <p class="svc-card__desc">Kết nối hành khách theo tuyến, tối ưu chi phí và thời gian.</p>
-      </li>
-      <li class="svc-card">
-        <span class="badge"><svg class="ic"><use href="#i-pin"/></svg></span>
-        <img class="svc-card__img" src="images/svc-2-dua-don-tan-noi.jpg" alt="Đưa đón tận nơi" width="800" height="500" loading="lazy">
-        <h3 class="svc-card__title">ĐƯA ĐÓN<br>TẬN NƠI</h3>
-        <p class="svc-card__desc">Đón và trả khách theo địa điểm yêu cầu.</p>
-      </li>
-      <li class="svc-card">
-        <span class="badge"><svg class="ic"><use href="#i-plane"/></svg></span>
-        <img class="svc-card__img" src="images/svc-3-dua-don-san-bay.jpg" alt="Đưa đón sân bay" width="800" height="500" loading="lazy">
-        <h3 class="svc-card__title">ĐƯA ĐÓN<br>SÂN BAY</h3>
-        <p class="svc-card__desc">Phục vụ cá nhân, gia đình và đoàn khách.</p>
-      </li>
-      <li class="svc-card">
-        <span class="badge"><svg class="ic"><use href="#i-map"/></svg></span>
-        <img class="svc-card__img" src="images/svc-4-ha-noi-va-cac-tinh.jpg" alt="Hà Nội và các tỉnh lân cận" width="800" height="500" loading="lazy">
-        <h3 class="svc-card__title">HÀ NỘI VÀ CÁC<br>TỈNH LÂN CẬN</h3>
-        <p class="svc-card__desc">Nhận đưa đón, di chuyển liên tỉnh, phục vụ công tác, thăm thân, du lịch…</p>
-      </li>
-      <li class="svc-card">
-        <span class="badge"><svg class="ic"><use href="#i-palm"/></svg></span>
-        <img class="svc-card__img" src="images/svc-5-du-lich.jpg" alt="Du lịch" width="800" height="500" loading="lazy">
-        <h3 class="svc-card__title">DU LỊCH</h3>
-        <p class="svc-card__desc">Cung cấp dịch vụ vận chuyển phục vụ các chuyến tham quan, nghỉ dưỡng.</p>
-      </li>
-    </ul>
-  </div>
-</section>
-
-<!-- ============ ĐỘI XE + ĐẶT XE ============ -->
-<section class="section section--tight" id="doi-xe">
-  <div class="container duo">
-
-    <div class="panel" id="gioi-thieu">
-      <h2 class="panel__title">ĐỘI XE CỦA TIẾN ĐỨC</h2>
-      <span class="ornament ornament--gold" aria-hidden="true"></span>
-
-      <div class="fleet">
-        <article class="fleet__item">
-          <span class="pill">VF5</span>
-          <h3 class="fleet__name">VINFAST VF 5</h3>
-          <p class="fleet__desc">Nhỏ gọn – tiết kiệm – phù hợp di chuyển nội đô và đường dài.</p>
-          <img class="fleet__car" src="images/vf5.png" alt="VinFast VF 5" width="855" height="465" loading="lazy">
-        </article>
-        <article class="fleet__item">
-          <span class="pill">LIMO GREEN</span>
-          <h3 class="fleet__name">VINFAST LIMO GREEN</h3>
-          <p class="fleet__desc">Không gian rộng rãi – hiện đại – phù hợp gia đình, nhóm khách và dịch vụ du lịch.</p>
-          <img class="fleet__car" src="images/vinfast-limo-green.png" alt="VinFast Limo Green" width="975" height="491" loading="lazy">
-        </article>
+          <a class="hotline" href="tel:0862933233">
+            <svg class="ic hotline__ic"><use href="#i-phone" /></svg>
+            <span class="hotline__text">
+              <span class="hotline__label">HOTLINE (24/7) - ZALO</span>
+              <span class="hotline__num">0862 933 233</span>
+            </span>
+          </a>
+        </div>
       </div>
-    </div>
 
-    <div class="panel" id="dat-xe">
-      <h2 class="panel__title">ĐẶT XE NGAY</h2>
+      <nav class="mainnav" id="mainnav">
+        <div class="container mainnav__inner">
+          <button
+            class="nav-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="navlist"
+          >
+            <span class="nav-toggle__bars"></span>
+            <span class="nav-toggle__label">MENU</span>
+          </button>
+          <ul class="navlist" id="navlist">
+            <li><a class="is-active" href="#top">TRANG CHỦ</a></li>
+            <li><a href="#gioi-thieu">GIỚI THIỆU</a></li>
+            <li><a href="#dich-vu">DỊCH VỤ</a></li>
+            <li><a href="#doi-xe">ĐỘI XE</a></li>
+            <li><a href="#tuyen-xe">TUYẾN XE</a></li>
+            <li><a href="#bang-gia">BẢNG GIÁ</a></li>
+            <li><a href="#dat-xe">ĐẶT XE</a></li>
+            <li><a href="tin-tuc/index.html">TIN TỨC</a></li>
+            <li><a href="lien-he/index.html">LIÊN HỆ</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
 
-      <form class="booking" id="booking-form" novalidate>
-        <div class="booking__box">
-          <div class="field">
-            <label class="field__label" for="f-pickup"><svg class="ic"><use href="#i-pin"/></svg>Điểm đón</label>
-            <div class="field__autocomplete">
-              <input class="field__input js-place-autocomplete" id="f-pickup" name="pickup" type="text" placeholder="Nhập điểm đón" autocomplete="off" role="combobox" aria-expanded="false" required>
-              <ul class="autocomplete-list" hidden></ul>
+    <main>
+      <!-- ============ HERO ============ -->
+      <section class="hero">
+        <div class="hero__media">
+          <img
+            class="hero__bg"
+            src="images/hero-banner.jpg"
+            alt="Xe VinFast VF5 và Limo Green của Tiến Đức trên cung đường ven vịnh Hạ Long"
+            width="2033"
+            height="773"
+            fetchpriority="high"
+          />
+          <img
+            class="hero__logo"
+            src="images/logo.png"
+            alt="Logo Công ty TNHH Thương mại Dịch vụ Vận tải và Du lịch Tiến Đức"
+            width="1281"
+            height="1228"
+            fetchpriority="high"
+          />
+        </div>
+
+        <span class="hero__arc" aria-hidden="true"></span>
+        <span class="hero__arc hero__arc--in" aria-hidden="true"></span>
+
+        <div class="hero__inner container">
+          <ul class="hero__feats">
+            <li class="feat">
+              <svg class="ic feat__ic"><use href="#i-shield" /></svg>
+              <span class="feat__text"><b>AN TOÀN</b><i>LÀ TRÊN HẾT</i></span>
+            </li>
+            <li class="feat">
+              <svg class="ic feat__ic"><use href="#i-leaf" /></svg>
+              <span class="feat__text"><b>XANH SẠCH</b><i>THÂN THIỆN</i></span>
+            </li>
+            <li class="feat">
+              <svg class="ic feat__ic"><use href="#i-hands" /></svg>
+              <span class="feat__text"><b>UY TÍN</b><i>CHẤT LƯỢNG</i></span>
+            </li>
+            <li class="feat">
+              <svg class="ic feat__ic"><use href="#i-globe" /></svg>
+              <span class="feat__text"
+                ><b>KẾT NỐI</b><i>MỌI HÀNH TRÌNH</i></span
+              >
+            </li>
+          </ul>
+
+          <div class="hero__cta">
+            <a class="hero__phone" href="tel:0862933233">
+              <span class="hero__phone-ic"
+                ><svg class="ic"><use href="#i-phone" /></svg
+              ></span>
+              0862 933 233
+            </a>
+            <a class="hotline hero__hotline" href="tel:0862933233">
+              <svg class="ic hotline__ic"><use href="#i-phone" /></svg>
+              <span class="hotline__text">
+                <span class="hotline__label">HOTLINE (24/7) - ZALO</span>
+                <span class="hotline__num">0862 933 233</span>
+              </span>
+            </a>
+            <a class="btn btn--gold" href="#dat-xe"
+              >ĐẶT XE NGAY <svg class="ic"><use href="#i-arrow" /></svg
+            ></a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ TUYẾN XE ============ -->
+      <section class="section" id="tuyen-xe">
+        <div class="container">
+          <h2 class="sec-title">TUYẾN XE PHỔ BIẾN</h2>
+          <p
+            class="route-price"
+            style="
+              text-align: center;
+              margin: 16px 0 28px;
+              font-size: 15px;
+              color: #d8a441;
+              font-weight: 600;
+            "
+          >
+            Giá từ 250k/người đến 300k cho 1 chiều
+          </p>
+
+          <ul class="route-grid">
+            <li class="route-card">
+              <div class="route-card__media">
+                <img
+                  src="images/route-1-ha-long-hai-phong.jpg"
+                  alt="Tuyến Hạ Long - Hải Phòng"
+                  width="800"
+                  height="400"
+                  loading="lazy"
+                />
+                <span class="badge badge--pin"
+                  ><svg class="ic"><use href="#i-pin" /></svg
+                ></span>
+              </div>
+              <p class="route-card__name">
+                HẠ LONG <span>&lt;=&gt;</span> HẢI PHÒNG
+              </p>
+            </li>
+            <li class="route-card">
+              <div class="route-card__media">
+                <img
+                  src="images/route-2-ha-long-san-bay-cat-bi.jpg"
+                  alt="Tuyến Hạ Long - Sân bay Cát Bi"
+                  width="800"
+                  height="400"
+                  loading="lazy"
+                />
+                <span class="badge badge--pin"
+                  ><svg class="ic"><use href="#i-pin" /></svg
+                ></span>
+              </div>
+              <p class="route-card__name">
+                HẠ LONG <span>&lt;=&gt;</span> SÂN BAY CÁT BI
+              </p>
+            </li>
+            <li class="route-card">
+              <div class="route-card__media">
+                <img
+                  src="images/route-3-ha-long-lien-tinh.jpg"
+                  alt="Tuyến Hạ Long - Liên Tỉnh"
+                  width="800"
+                  height="400"
+                  loading="lazy"
+                />
+                <span class="badge badge--pin"
+                  ><svg class="ic"><use href="#i-pin" /></svg
+                ></span>
+              </div>
+              <p class="route-card__name">
+                HẠ LONG <span>&lt;=&gt;</span> LIÊN TỈNH
+              </p>
+            </li>
+            <li class="route-card">
+              <div class="route-card__media">
+                <img
+                  src="images/route-4-cam-pha-hai-phong.jpg"
+                  alt="Tuyến Cẩm Phả - Hải Phòng"
+                  width="800"
+                  height="400"
+                  loading="lazy"
+                />
+                <span class="badge badge--pin"
+                  ><svg class="ic"><use href="#i-pin" /></svg
+                ></span>
+              </div>
+              <p class="route-card__name">
+                CẨM PHẢ <span>&lt;=&gt;</span> HẢI PHÒNG
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============ BẢNG GIÁ XE ============ -->
+      <section class="section section--price" id="bang-gia">
+        <div class="container">
+          <h2 class="sec-title">BẢNG GIÁ XE</h2>
+          <span class="ornament ornament--gold" aria-hidden="true"></span>
+          <p class="price-sub">Hạ Long ⇄ Hải Phòng</p>
+
+          <ul class="price-grid">
+            <li class="price-card">
+              <span class="badge"
+                ><svg class="ic"><use href="#i-ticket" /></svg
+              ></span>
+              <h3 class="price-card__title">VÉ GHÉP</h3>
+              <p class="price-card__amount">250.000<span>đ</span></p>
+              <p class="price-card__desc">
+                Tiết kiệm, phù hợp cho khách đi một mình
+              </p>
+            </li>
+            <li class="price-card">
+              <span class="badge"
+                ><svg class="ic"><use href="#i-plane" /></svg
+              ></span>
+              <h3 class="price-card__title">XE SÂN BAY CÁT BI</h3>
+              <p class="price-card__amount">250.000<span>đ</span></p>
+              <p class="price-card__desc">Đưa đón khách tại sân bay Cát Bi</p>
+            </li>
+            <li class="price-card">
+              <span class="badge"
+                ><svg class="ic"><use href="#i-car" /></svg
+              ></span>
+              <h3 class="price-card__title">XE 4 CHỖ</h3>
+              <p class="price-card__amount">400.000<span>đ</span></p>
+              <p class="price-card__desc">Phù hợp gia đình nhỏ hoặc nhóm bạn</p>
+            </li>
+            <li class="price-card">
+              <span class="badge"
+                ><svg class="ic"><use href="#i-users" /></svg
+              ></span>
+              <h3 class="price-card__title">XE 7 CHỖ</h3>
+              <p class="price-card__amount">500.000<span>đ</span></p>
+              <p class="price-card__desc">Rộng rãi cho gia đình đông người</p>
+            </li>
+            <li class="price-card price-card--pro">
+              <span class="badge"
+                ><svg class="ic"><use href="#i-tie" /></svg
+              ></span>
+              <span class="price-card__flag">SANG TRỌNG</span>
+              <h3 class="price-card__title">XE LIMOUSINE 9 GHẾ</h3>
+              <p class="price-card__amount">1.300.000<span>đ</span></p>
+              <p class="price-card__desc">Đẳng cấp, tiện nghi cao cấp</p>
+            </li>
+            <li class="price-card">
+              <span class="badge"
+                ><svg class="ic"><use href="#i-map" /></svg
+              ></span>
+              <h3 class="price-card__title">XE 16 CHỖ</h3>
+              <p class="price-card__amount">1.300.000<span>đ</span></p>
+              <p class="price-card__desc">
+                Thích hợp cho đoàn du lịch, sự kiện
+              </p>
+            </li>
+          </ul>
+
+          <div class="notice">
+            <div class="notice__head">
+              <svg class="ic notice__ic"><use href="#i-warn" /></svg>
+              <h3 class="notice__title">LƯU Ý QUAN TRỌNG</h3>
+            </div>
+            <p class="notice__text">
+              <b>Phụ phí phát sinh:</b> Các địa điểm ngoại thành sẽ có phụ phí
+              tùy theo khoảng cách. Vui lòng liên hệ để được tư vấn chi tiết về
+              phụ phí ngoại thành trước khi đặt xe.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ ĐỘI XE + ĐẶT XE ============ -->
+      <section class="section section--tight" id="doi-xe">
+        <div class="container duo">
+          <div class="panel" id="gioi-thieu">
+            <h2 class="panel__title">ĐỘI XE CỦA TIẾN ĐỨC</h2>
+            <span class="ornament ornament--gold" aria-hidden="true"></span>
+
+            <div class="fleet">
+              <article class="fleet__item">
+                <span class="pill">VF5</span>
+                <h3 class="fleet__name">VINFAST VF 5</h3>
+                <p class="fleet__desc">
+                  Nhỏ gọn – tiết kiệm – phù hợp di chuyển nội đô và đường dài.
+                </p>
+                <img
+                  class="fleet__car"
+                  src="images/vf5.png"
+                  alt="VinFast VF 5"
+                  width="855"
+                  height="465"
+                  loading="lazy"
+                />
+              </article>
+              <article class="fleet__item">
+                <span class="pill">LIMO GREEN</span>
+                <h3 class="fleet__name">VINFAST LIMO GREEN</h3>
+                <p class="fleet__desc">
+                  Không gian rộng rãi – hiện đại – phù hợp gia đình, nhóm khách
+                  và dịch vụ du lịch.
+                </p>
+                <img
+                  class="fleet__car"
+                  src="images/vinfast-limo-green.png"
+                  alt="VinFast Limo Green"
+                  width="975"
+                  height="491"
+                  loading="lazy"
+                />
+              </article>
             </div>
           </div>
-          <div class="field">
-            <label class="field__label" for="f-drop"><svg class="ic"><use href="#i-pin"/></svg>Điểm trả</label>
-            <div class="field__autocomplete">
-              <input class="field__input js-place-autocomplete" id="f-drop" name="drop" type="text" placeholder="Nhập điểm trả" autocomplete="off" role="combobox" aria-expanded="false" required>
-              <ul class="autocomplete-list" hidden></ul>
+
+          <div class="panel" id="dat-xe">
+            <h2 class="panel__title">ĐẶT XE NGAY</h2>
+
+            <form class="booking" id="booking-form" novalidate>
+              <div class="booking__box">
+                <div class="field">
+                  <label class="field__label" for="f-pickup"
+                    ><svg class="ic"><use href="#i-pin" /></svg>Điểm đón</label
+                  >
+                  <div class="field__autocomplete">
+                    <input
+                      class="field__input js-place-autocomplete"
+                      id="f-pickup"
+                      name="pickup"
+                      type="text"
+                      placeholder="Nhập điểm đón"
+                      autocomplete="off"
+                      role="combobox"
+                      aria-autocomplete="list"
+                      aria-expanded="false"
+                      required
+                    />
+                    <ul class="autocomplete-list" id="f-pickup-list" role="listbox" hidden></ul>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="field__label" for="f-drop"
+                    ><svg class="ic"><use href="#i-pin" /></svg>Điểm trả</label
+                  >
+                  <div class="field__autocomplete">
+                    <input
+                      class="field__input js-place-autocomplete"
+                      id="f-drop"
+                      name="drop"
+                      type="text"
+                      placeholder="Nhập điểm trả"
+                      autocomplete="off"
+                      role="combobox"
+                      aria-autocomplete="list"
+                      aria-expanded="false"
+                      required
+                    />
+                    <ul class="autocomplete-list" id="f-drop-list" role="listbox" hidden></ul>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="field__label" for="f-time"
+                    ><svg class="ic"><use href="#i-calendar" /></svg>Thời gian
+                    đi</label
+                  >
+                  <input
+                    class="field__input"
+                    id="f-time"
+                    name="time"
+                    type="text"
+                    placeholder="Chọn ngày giờ"
+                    onfocus="this.type = 'datetime-local'"
+                    onblur="if (!this.value) this.type = 'text';"
+                    required
+                  />
+                </div>
+                <div class="field">
+                  <label class="field__label" for="f-people"
+                    ><svg class="ic"><use href="#i-user" /></svg>Số lượng
+                    người</label
+                  >
+                  <input
+                    class="field__input"
+                    id="f-people"
+                    name="people"
+                    type="number"
+                    min="1"
+                    max="45"
+                    placeholder="Nhập số lượng người"
+                    required
+                  />
+                </div>
+                <div class="field">
+                  <label class="field__label" for="f-phone"
+                    ><svg class="ic"><use href="#i-phone" /></svg>Số điện
+                    thoại</label
+                  >
+                  <input
+                    class="field__input"
+                    id="f-phone"
+                    name="phone"
+                    type="tel"
+                    placeholder="Nhập số điện thoại"
+                    required
+                  />
+                </div>
+              </div>
+
+              <button class="btn btn--gold btn--block" type="submit">
+                GỬI YÊU CẦU ĐẶT XE <svg class="ic"><use href="#i-send" /></svg>
+              </button>
+              <p class="booking__msg" id="booking-msg" role="status"></p>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ DỊCH VỤ ============ -->
+      <section class="section" id="dich-vu">
+        <div class="container">
+          <h2 class="sec-title">DỊCH VỤ CỦA CHÚNG TÔI</h2>
+
+          <ul class="svc-grid">
+            <li class="svc-card">
+              <span class="badge"
+                ><svg class="ic"><use href="#i-users" /></svg
+              ></span>
+              <img
+                class="svc-card__img"
+                src="images/svc-1-xe-ghep-tien-chuyen.jpg"
+                alt="Xe ghép, xe tiện chuyến"
+                width="800"
+                height="500"
+                loading="lazy"
+              />
+              <h3 class="svc-card__title">XE GHÉP –<br />XE TIỆN CHUYẾN</h3>
+              <p class="svc-card__desc">
+                Kết nối hành khách theo tuyến, tối ưu chi phí và thời gian.
+              </p>
+            </li>
+            <li class="svc-card">
+              <span class="badge"
+                ><svg class="ic"><use href="#i-pin" /></svg
+              ></span>
+              <img
+                class="svc-card__img"
+                src="images/svc-2-dua-don-tan-noi.jpg"
+                alt="Đưa đón tận nơi"
+                width="800"
+                height="500"
+                loading="lazy"
+              />
+              <h3 class="svc-card__title">ĐƯA ĐÓN<br />TẬN NƠI</h3>
+              <p class="svc-card__desc">
+                Đón và trả khách theo địa điểm yêu cầu.
+              </p>
+            </li>
+            <li class="svc-card">
+              <span class="badge"
+                ><svg class="ic"><use href="#i-plane" /></svg
+              ></span>
+              <img
+                class="svc-card__img"
+                src="images/svc-3-dua-don-san-bay.jpg"
+                alt="Đưa đón sân bay"
+                width="800"
+                height="500"
+                loading="lazy"
+              />
+              <h3 class="svc-card__title">ĐƯA ĐÓN<br />SÂN BAY</h3>
+              <p class="svc-card__desc">
+                Phục vụ cá nhân, gia đình và đoàn khách.
+              </p>
+            </li>
+            <li class="svc-card">
+              <span class="badge"
+                ><svg class="ic"><use href="#i-map" /></svg
+              ></span>
+              <img
+                class="svc-card__img"
+                src="images/svc-4-ha-noi-va-cac-tinh.jpg"
+                alt="Hà Nội và các tỉnh lân cận"
+                width="800"
+                height="500"
+                loading="lazy"
+              />
+              <h3 class="svc-card__title">HÀ NỘI VÀ CÁC<br />TỈNH LÂN CẬN</h3>
+              <p class="svc-card__desc">
+                Nhận đưa đón, di chuyển liên tỉnh, phục vụ công tác, thăm thân,
+                du lịch…
+              </p>
+            </li>
+            <li class="svc-card">
+              <span class="badge"
+                ><svg class="ic"><use href="#i-palm" /></svg
+              ></span>
+              <img
+                class="svc-card__img"
+                src="images/svc-5-du-lich.jpg"
+                alt="Du lịch"
+                width="800"
+                height="500"
+                loading="lazy"
+              />
+              <h3 class="svc-card__title">DU LỊCH</h3>
+              <p class="svc-card__desc">
+                Cung cấp dịch vụ vận chuyển phục vụ các chuyến tham quan, nghỉ
+                dưỡng.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============ LỜI CHÀO + VÌ SAO ============ -->
+      <section class="section section--tight" id="tin-tuc">
+        <div class="container duo duo--even">
+          <article class="card">
+            <h2 class="card__title">LỜI CHÀO TRÂN TRỌNG</h2>
+            <span class="ornament" aria-hidden="true"></span>
+
+            <div class="greet">
+              <p>Gửi lời chào trân trọng đến Quý Khách Hàng.</p>
+              <p>Cảm ơn Quý Khách đã ủng hộ nhà xe trong suốt thời gian qua.</p>
+              <p>Bên em chuyên:</p>
+              <ul class="greet__list">
+                <li>
+                  <svg class="ic greet__check"><use href="#i-check" /></svg>Đưa
+                  đón tận nơi – đúng giờ
+                </li>
+                <li>
+                  <svg class="ic greet__check"><use href="#i-check" /></svg>Xe
+                  đời mới, sạch sẽ, điều hòa mát
+                </li>
+                <li>
+                  <svg class="ic greet__check"><use href="#i-check" /></svg>Giá
+                  hợp lý – không phát sinh
+                </li>
+              </ul>
+              <p class="greet__lead">
+                <svg class="ic greet__hand"><use href="#i-hand-point" /></svg
+                ><b>Để đặt xe nhanh, Quý khách vui lòng gửi giúp:</b>
+              </p>
+              <ul class="greet__dots">
+                <li>Điểm đón / Điểm trả</li>
+                <li>Thời gian đi</li>
+                <li>Số lượng người</li>
+              </ul>
+              <p class="greet__lead">
+                <svg class="ic greet__bolt"><use href="#i-bolt" /></svg
+                ><b>Quý Khách đặt sớm để giữ xe giờ đẹp &amp; giá tốt!</b>
+              </p>
+              <p class="greet__lead">
+                <svg class="ic greet__heart"><use href="#i-heart" /></svg>Rất
+                hân hạnh được phục vụ Quý Khách trong thời gian tới.
+              </p>
+            </div>
+          </article>
+
+          <article class="card">
+            <h2 class="card__title">VÌ SAO CHỌN TIẾN ĐỨC?</h2>
+            <span class="ornament" aria-hidden="true"></span>
+
+            <ul class="why">
+              <li class="why__item">
+                <svg class="ic why__ic"><use href="#i-car" /></svg>
+                <span><b>Xe đời mới</b><i>An toàn – tiện nghi</i></span>
+              </li>
+              <li class="why__item">
+                <svg class="ic why__ic"><use href="#i-tie" /></svg>
+                <span
+                  ><b>Tài xế chuyên nghiệp</b><i>Lịch sự – thân thiện</i></span
+                >
+              </li>
+              <li class="why__item">
+                <svg class="ic why__ic"><use href="#i-clock" /></svg>
+                <span><b>Đón trả đúng giờ</b><i>Cam kết đúng hẹn</i></span>
+              </li>
+              <li class="why__item">
+                <svg class="ic why__ic"><use href="#i-dollar" /></svg>
+                <span><b>Giá cả hợp lý</b><i>Minh bạch – rõ ràng</i></span>
+              </li>
+              <li class="why__item">
+                <svg class="ic why__ic"><use href="#i-headset" /></svg>
+                <span><b>Hỗ trợ 24/7</b><i>Luôn sẵn sàng</i></span>
+              </li>
+              <li class="why__item">
+                <svg class="ic why__ic"><use href="#i-heart" /></svg>
+                <span><b>Phục vụ tận tâm</b><i>Khách hàng là ưu tiên</i></span>
+              </li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="site-footer" id="lien-he">
+      <div class="container foot">
+        <div class="foot__col foot__brand">
+          <div class="foot__brand-top">
+            <img
+              class="foot__logo"
+              src="images/logo.png"
+              alt="Logo Tiến Đức"
+              width="256"
+              height="256"
+              loading="lazy"
+            />
+            <div>
+              <p class="foot__co">
+                CÔNG TY TNHH THƯƠNG MẠI<br />DỊCH VỤ VẬN TẢI VÀ DU LỊCH
+              </p>
+              <p class="foot__name">TIẾN ĐỨC</p>
+              <p class="foot__slogan">VỮNG BƯỚC - VƯƠN XA</p>
             </div>
           </div>
-          <div class="field">
-            <label class="field__label" for="f-time"><svg class="ic"><use href="#i-calendar"/></svg>Thời gian đi</label>
-            <input class="field__input" id="f-time" name="time" type="text" placeholder="Chọn ngày giờ"
-                   onfocus="this.type='datetime-local'" onblur="if(!this.value)this.type='text'" required>
+          <img
+            class="foot__cars"
+            src="images/footer-cars.png"
+            alt="Đội xe Tiến Đức"
+            width="1084"
+            height="299"
+            loading="lazy"
+          />
+        </div>
+
+        <div class="foot__col">
+          <h3 class="foot__title">THÔNG TIN LIÊN HỆ</h3>
+          <ul class="foot__list">
+            <li>
+              <span class="dot"
+                ><svg class="ic"><use href="#i-phone" /></svg></span
+              ><a href="tel:0862933233">0862 933 233</a>
+            </li>
+            <li>
+              <span class="dot"
+                ><svg class="ic"><use href="#i-chat" /></svg></span
+              ><a
+                href="https://zalo.me/0862933233"
+                target="_blank"
+                rel="noopener"
+                >Zalo: 0862 933 233</a
+              >
+            </li>
+            <li>
+              <span class="dot"
+                ><svg class="ic"><use href="#i-mail" /></svg></span
+              ><a href="mailto:tienductransport@gmail.com"
+                >tienductransport@gmail.com</a
+              >
+            </li>
+            <li>
+              <span class="dot"
+                ><svg class="ic"><use href="#i-pin" /></svg></span
+              ><span>Số 369A, Đường Vũ Văn Hiếu,<br />Hà Tu, Quảng Ninh</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="foot__col">
+          <h3 class="foot__title">KHU VỰC HOẠT ĐỘNG</h3>
+          <ul class="foot__list">
+            <li>
+              <span class="dot"
+                ><svg class="ic"><use href="#i-pin" /></svg></span
+              ><span>Hạ Long – Quảng Ninh</span>
+            </li>
+            <li>
+              <span class="dot"
+                ><svg class="ic"><use href="#i-pin" /></svg></span
+              ><span>Các huyện, thị xã trong tỉnh</span>
+            </li>
+            <li>
+              <span class="dot"
+                ><svg class="ic"><use href="#i-pin" /></svg></span
+              ><span>Hải Phòng, Hà Nội và các tỉnh lân cận</span>
+            </li>
+            <li>
+              <span class="dot"
+                ><svg class="ic"><use href="#i-pin" /></svg></span
+              ><span>Theo nhu cầu của Quý khách</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="foot__col foot__col--right">
+          <h3 class="foot__title">KẾT NỐI VỚI CHÚNG TÔI</h3>
+          <div class="socials">
+            <a class="social social--fb" href="#" aria-label="Facebook"
+              ><svg class="ic"><use href="#i-fb" /></svg
+            ></a>
+            <a
+              class="social social--zalo"
+              href="https://zalo.me/0862933233"
+              target="_blank"
+              rel="noopener"
+              aria-label="Zalo"
+              >Zalo</a
+            >
+            <a class="social social--tt" href="#" aria-label="TikTok"
+              ><svg class="ic"><use href="#i-tiktok" /></svg
+            ></a>
           </div>
-          <div class="field">
-            <label class="field__label" for="f-people"><svg class="ic"><use href="#i-user"/></svg>Số lượng người</label>
-            <input class="field__input" id="f-people" name="people" type="number" min="1" max="45" placeholder="Nhập số lượng người" required>
-          </div>
-          <div class="field">
-            <label class="field__label" for="f-phone"><svg class="ic"><use href="#i-phone"/></svg>Số điện thoại</label>
-            <input class="field__input" id="f-phone" name="phone" type="tel" placeholder="Nhập số điện thoại" required>
-          </div>
-        </div>
-
-        <button class="btn btn--gold btn--block" type="submit">
-          GỬI YÊU CẦU ĐẶT XE <svg class="ic"><use href="#i-send"/></svg>
-        </button>
-        <p class="booking__msg" id="booking-msg" role="status"></p>
-      </form>
-    </div>
-
-  </div>
-</section>
-
-<!-- ============ TUYẾN XE ============ -->
-<section class="section" id="tuyen-xe">
-  <div class="container">
-    <h2 class="sec-title">TUYẾN XE PHỔ BIẾN</h2>
-    <p class="route-price" style="text-align:center;margin:16px 0 28px;font-size:15px;color:#d8a441;font-weight:600">Giá từ 250k/người đến 300k cho 1 chiều</p>
-
-    <ul class="route-grid" id="bang-gia">
-      <li class="route-card">
-        <div class="route-card__media">
-          <img src="images/route-1-ha-long-hai-phong.jpg" alt="Tuyến Hạ Long - Hải Phòng" width="800" height="400" loading="lazy">
-          <span class="badge badge--pin"><svg class="ic"><use href="#i-pin"/></svg></span>
-        </div>
-        <p class="route-card__name">HẠ LONG <span>&lt;=&gt;</span> HẢI PHÒNG</p>
-      </li>
-      <li class="route-card">
-        <div class="route-card__media">
-          <img src="images/route-2-ha-long-san-bay-cat-bi.jpg" alt="Tuyến Hạ Long - Sân bay Cát Bi" width="800" height="400" loading="lazy">
-          <span class="badge badge--pin"><svg class="ic"><use href="#i-pin"/></svg></span>
-        </div>
-        <p class="route-card__name">HẠ LONG <span>&lt;=&gt;</span> SÂN BAY CÁT BI</p>
-      </li>
-      <li class="route-card">
-        <div class="route-card__media">
-          <img src="images/route-3-ha-long-lien-tinh.jpg" alt="Tuyến Hạ Long - Liên Tỉnh" width="800" height="400" loading="lazy">
-          <span class="badge badge--pin"><svg class="ic"><use href="#i-pin"/></svg></span>
-        </div>
-        <p class="route-card__name">HẠ LONG <span>&lt;=&gt;</span> LIÊN TỈNH</p>
-      </li>
-      <li class="route-card">
-        <div class="route-card__media">
-          <img src="images/route-4-cam-pha-hai-phong.jpg" alt="Tuyến Cẩm Phả - Hải Phòng" width="800" height="400" loading="lazy">
-          <span class="badge badge--pin"><svg class="ic"><use href="#i-pin"/></svg></span>
-        </div>
-        <p class="route-card__name">CẨM PHẢ <span>&lt;=&gt;</span> HẢI PHÒNG</p>
-      </li>
-    </ul>
-  </div>
-</section>
-
-<!-- ============ LỜI CHÀO + VÌ SAO ============ -->
-<section class="section section--tight" id="tin-tuc">
-  <div class="container duo duo--even">
-
-    <article class="card">
-      <h2 class="card__title">LỜI CHÀO TRÂN TRỌNG</h2>
-      <span class="ornament" aria-hidden="true"></span>
-
-      <div class="greet">
-        <p>Gửi lời chào trân trọng đến Quý Khách Hàng.</p>
-        <p>Cảm ơn Quý Khách đã ủng hộ nhà xe trong suốt thời gian qua.</p>
-        <p>Bên em chuyên:</p>
-        <ul class="greet__list">
-          <li><svg class="ic greet__check"><use href="#i-check"/></svg>Đưa đón tận nơi – đúng giờ</li>
-          <li><svg class="ic greet__check"><use href="#i-check"/></svg>Xe đời mới, sạch sẽ, điều hòa mát</li>
-          <li><svg class="ic greet__check"><use href="#i-check"/></svg>Giá hợp lý – không phát sinh</li>
-        </ul>
-        <p class="greet__lead"><svg class="ic greet__hand"><use href="#i-hand-point"/></svg><b>Để đặt xe nhanh, Quý khách vui lòng gửi giúp:</b></p>
-        <ul class="greet__dots">
-          <li>Điểm đón / Điểm trả</li>
-          <li>Thời gian đi</li>
-          <li>Số lượng người</li>
-        </ul>
-        <p class="greet__lead"><svg class="ic greet__bolt"><use href="#i-bolt"/></svg><b>Quý Khách đặt sớm để giữ xe giờ đẹp &amp; giá tốt!</b></p>
-        <p class="greet__lead"><svg class="ic greet__heart"><use href="#i-heart"/></svg>Rất hân hạnh được phục vụ Quý Khách trong thời gian tới.</p>
-      </div>
-    </article>
-
-    <article class="card">
-      <h2 class="card__title">VÌ SAO CHỌN TIẾN ĐỨC?</h2>
-      <span class="ornament" aria-hidden="true"></span>
-
-      <ul class="why">
-        <li class="why__item">
-          <svg class="ic why__ic"><use href="#i-car"/></svg>
-          <span><b>Xe đời mới</b><i>An toàn – tiện nghi</i></span>
-        </li>
-        <li class="why__item">
-          <svg class="ic why__ic"><use href="#i-tie"/></svg>
-          <span><b>Tài xế chuyên nghiệp</b><i>Lịch sự – thân thiện</i></span>
-        </li>
-        <li class="why__item">
-          <svg class="ic why__ic"><use href="#i-clock"/></svg>
-          <span><b>Đón trả đúng giờ</b><i>Cam kết đúng hẹn</i></span>
-        </li>
-        <li class="why__item">
-          <svg class="ic why__ic"><use href="#i-dollar"/></svg>
-          <span><b>Giá cả hợp lý</b><i>Minh bạch – rõ ràng</i></span>
-        </li>
-        <li class="why__item">
-          <svg class="ic why__ic"><use href="#i-headset"/></svg>
-          <span><b>Hỗ trợ 24/7</b><i>Luôn sẵn sàng</i></span>
-        </li>
-        <li class="why__item">
-          <svg class="ic why__ic"><use href="#i-heart"/></svg>
-          <span><b>Phục vụ tận tâm</b><i>Khách hàng là ưu tiên</i></span>
-        </li>
-      </ul>
-    </article>
-
-  </div>
-</section>
-
-</main>
-
-<!-- ============ FOOTER ============ -->
-<footer class="site-footer" id="lien-he">
-  <div class="container foot">
-
-    <div class="foot__col foot__brand">
-      <div class="foot__brand-top">
-        <img class="foot__logo" src="images/logo.png" alt="Logo Tiến Đức" width="256" height="256" loading="lazy">
-        <div>
-          <p class="foot__co">CÔNG TY TNHH THƯƠNG MẠI<br>DỊCH VỤ VẬN TẢI VÀ DU LỊCH</p>
-          <p class="foot__name">TIẾN ĐỨC</p>
-          <p class="foot__slogan">VỮNG BƯỚC - VƯƠN XA</p>
+          <a class="hotline hotline--foot" href="tel:0862933233">
+            <svg class="ic hotline__ic"><use href="#i-phone" /></svg>
+            <span class="hotline__text">
+              <span class="hotline__label">HOTLINE (24/7) - ZALO</span>
+              <span class="hotline__num">0862 933 233</span>
+            </span>
+          </a>
+          <p class="foot__credit">
+            Thiết kế bởi Tiến Đức
+            <svg class="ic foot__credit-ic"><use href="#i-heart" /></svg>
+          </p>
         </div>
       </div>
-      <img class="foot__cars" src="images/footer-cars.png" alt="Đội xe Tiến Đức" width="1084" height="299" loading="lazy">
-    </div>
+    </footer>
 
-    <div class="foot__col">
-      <h3 class="foot__title">THÔNG TIN LIÊN HỆ</h3>
-      <ul class="foot__list">
-        <li><span class="dot"><svg class="ic"><use href="#i-phone"/></svg></span><a href="tel:0862933233">0862 933 233</a></li>
-        <li><span class="dot"><svg class="ic"><use href="#i-chat"/></svg></span><a href="https://zalo.me/0862933233" target="_blank" rel="noopener">Zalo: 0862 933 233</a></li>
-        <li><span class="dot"><svg class="ic"><use href="#i-mail"/></svg></span><a href="mailto:tienductransport@gmail.com">tienductransport@gmail.com</a></li>
-        <li><span class="dot"><svg class="ic"><use href="#i-pin"/></svg></span><span>Số 369A, Đường Vũ Văn Hiếu,<br>Hà Tu, Quảng Ninh</span></li>
-      </ul>
-    </div>
+    <a
+      class="callnow callnow--zalo"
+      href="https://zalo.me/0862933233"
+      target="_blank"
+      rel="noopener"
+      aria-label="Chat Zalo 0862 933 233"
+    >
+      <span class="callnow__label">Zalo</span>
+    </a>
+    <a class="callnow" href="tel:0862933233" aria-label="Gọi ngay 0862 933 233">
+      <svg class="ic"><use href="#i-phone" /></svg>
+    </a>
 
-    <div class="foot__col">
-      <h3 class="foot__title">KHU VỰC HOẠT ĐỘNG</h3>
-      <ul class="foot__list">
-        <li><span class="dot"><svg class="ic"><use href="#i-pin"/></svg></span><span>Hạ Long – Quảng Ninh</span></li>
-        <li><span class="dot"><svg class="ic"><use href="#i-pin"/></svg></span><span>Các huyện, thị xã trong tỉnh</span></li>
-        <li><span class="dot"><svg class="ic"><use href="#i-pin"/></svg></span><span>Hải Phòng, Hà Nội và các tỉnh lân cận</span></li>
-        <li><span class="dot"><svg class="ic"><use href="#i-pin"/></svg></span><span>Theo nhu cầu của Quý khách</span></li>
-      </ul>
-    </div>
-
-    <div class="foot__col foot__col--right">
-      <h3 class="foot__title">KẾT NỐI VỚI CHÚNG TÔI</h3>
-      <div class="socials">
-        <a class="social social--fb" href="#" aria-label="Facebook"><svg class="ic"><use href="#i-fb"/></svg></a>
-        <a class="social social--zalo" href="https://zalo.me/0862933233" target="_blank" rel="noopener" aria-label="Zalo">Zalo</a>
-        <a class="social social--tt" href="#" aria-label="TikTok"><svg class="ic"><use href="#i-tiktok"/></svg></a>
-      </div>
-      <a class="hotline hotline--foot" href="tel:0862933233">
-        <svg class="ic hotline__ic"><use href="#i-phone"/></svg>
-        <span class="hotline__text">
-          <span class="hotline__label">HOTLINE (24/7) - ZALO</span>
-          <span class="hotline__num">0862 933 233</span>
-        </span>
-      </a>
-      <p class="foot__credit">Thiết kế bởi Tiến Đức <svg class="ic foot__credit-ic"><use href="#i-heart"/></svg></p>
-    </div>
-
-  </div>
-</footer>
-
-<a class="callnow callnow--zalo" href="https://zalo.me/0862933233" target="_blank" rel="noopener" aria-label="Chat Zalo 0862 933 233">
-  <span class="callnow__label">Zalo</span>
-</a>
-<a class="callnow" href="tel:0862933233" aria-label="Gọi ngay 0862 933 233">
-  <svg class="ic"><use href="#i-phone"/></svg>
-</a>
-
-<script src="js/place-autocomplete.js"></script>
-<script src="js/main.js"></script>
-</body>
+    <script src="js/main.js"></script>
+    <script src="js/place-autocomplete.js"></script>
+  </body>
 </html>
