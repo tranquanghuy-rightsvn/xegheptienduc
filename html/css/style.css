@@ -902,7 +902,8 @@ textarea.field__input{resize:vertical;min-height:78px;line-height:1.45;padding-t
 
 @media (max-width:900px){
   .topbar__inner{flex-wrap:wrap;justify-content:center;text-align:center;gap:14px;padding:14px 0}
-  .topbar__title{order:3;flex-basis:100%;font-size:16px}
+  .topbar__title{order:-1;flex-basis:100%;font-size:16px}
+  .topbar .hotline{display:none}
   .mainnav__inner{flex-direction:column;align-items:stretch}
   .nav-toggle{display:flex;align-self:flex-start}
   .navlist{
