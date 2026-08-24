@@ -749,6 +749,52 @@ button,input{font:inherit;color:inherit}
 .callnow__label{font-family:var(--ff-head);font-weight:800;font-size:13px;letter-spacing:.3px}
 
 /* =====================================================================
+   TRANG CON — page hero band (dùng cho các trang trong /lien-he, v.v.)
+   ===================================================================== */
+.page-hero{
+  text-align:center;padding:38px 0 32px;
+  background:linear-gradient(180deg,#00351a 0%,#002c15 55%,#002612 100%);
+  border-bottom:3px solid var(--gold);
+}
+.page-hero__crumb{
+  font-family:var(--ff-head);font-weight:600;font-size:12px;letter-spacing:1.2px;
+  color:var(--gold-soft);text-transform:uppercase;
+}
+.page-hero__crumb a{transition:color .22s}
+.page-hero__crumb a:hover{color:var(--gold-l)}
+.page-hero__title{
+  margin-top:6px;font-family:var(--ff-head);font-weight:800;font-size:32px;
+  letter-spacing:.6px;color:var(--gold-l);text-transform:uppercase;
+}
+.page-hero .ornament{margin:8px auto}
+.page-hero__desc{
+  max-width:620px;margin:0 auto;font-size:14px;line-height:1.6;
+  color:var(--on-dark-2);font-weight:500;
+}
+
+/* ---------- Form liên hệ: ô nhập nhiều dòng ---------- */
+.field--area{align-items:flex-start}
+.field--area .field__label{padding-top:6px}
+textarea.field__input{resize:vertical;min-height:78px;line-height:1.45;padding-top:7px}
+
+/* ---------- Danh sách thông tin liên hệ (trong .card) ---------- */
+.contact-list{display:flex;flex-direction:column;gap:13px;margin-top:2px}
+.contact-list li{display:flex;align-items:flex-start;gap:12px}
+.contact-list b{
+  display:block;font-family:var(--ff-head);font-weight:700;font-size:13.5px;
+  color:var(--ink);margin-bottom:1px;
+}
+.contact-list span,.contact-list a{font-size:13px;line-height:1.5;color:var(--muted);font-weight:500}
+.contact-list a:hover{color:var(--gold-d)}
+
+/* ---------- Bản đồ Google Maps ---------- */
+.map-frame{
+  margin-top:14px;border:1.5px solid var(--gold);border-radius:var(--r-panel);
+  overflow:hidden;box-shadow:var(--shadow);line-height:0;
+}
+.map-frame iframe{width:100%;height:360px;border:0;display:block}
+
+/* =====================================================================
    RESPONSIVE
    ===================================================================== */
 @media (max-width:1200px){
@@ -759,6 +805,7 @@ button,input{font:inherit;color:inherit}
   .feat{padding:0 18px}
   .feat__text b{font-size:17px}
   .sec-title{font-size:26px}
+  .page-hero__title{font-size:28px}
 }
 
 @media (max-width:1024px){
@@ -824,6 +871,9 @@ button,input{font:inherit;color:inherit}
   .route-card__name{font-size:16px}
   .price-grid{grid-template-columns:repeat(2,1fr);gap:32px 14px}
   .sec-title{font-size:22px}
+  .page-hero{padding:28px 0 24px}
+  .page-hero__title{font-size:22px}
+  .map-frame iframe{height:260px}
   .card__title,.panel__title{font-size:19px}
   .field{grid-template-columns:1fr;gap:5px;padding:5px 0}
   .fleet__desc{max-width:58%}

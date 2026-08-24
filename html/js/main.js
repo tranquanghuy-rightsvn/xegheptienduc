@@ -64,11 +64,13 @@
     window.scrollTo({ top: top < 0 ? 0 : top, behavior: 'smooth' });
   });
 
-  /* ---------- 4. Form đặt xe (xử lý cục bộ, không gọi API) ---------- */
-  var form = document.getElementById('booking-form');
-  var msg = document.getElementById('booking-msg');
+  /* ---------- 4. Form đặt xe / liên hệ (xử lý cục bộ, không gọi API) ---------- */
+  var forms = Array.prototype.slice.call(document.querySelectorAll('form[novalidate]'));
 
-  if (form && msg) {
+  forms.forEach(function (form) {
+    var msg = form.querySelector('[role="status"]');
+    if (!msg) return;
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
@@ -76,17 +78,21 @@
       var invalid = null;
 
       fields.forEach(function (f) {
-        var bad = !f.value.trim();
-        if (f.id === 'f-phone' && !bad) {
-          bad = !/^[0-9+\s.\-()]{9,15}$/.test(f.value.trim());
+        var value = f.value.trim();
+        var bad = f.required && !value;
+        if (value && f.type === 'tel') {
+          bad = bad || !/^[0-9+\s.\-()]{9,15}$/.test(value);
+        }
+        if (value && f.type === 'email') {
+          bad = bad || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
         }
         f.classList.toggle('is-error', bad);
         if (bad && !invalid) invalid = f;
       });
 
       if (invalid) {
-        msg.textContent = invalid.id === 'f-phone' && invalid.value.trim()
-          ? 'Số điện thoại chưa đúng định dạng, Quý khách kiểm tra lại giúp em nhé.'
+        msg.textContent = (invalid.type === 'tel' || invalid.type === 'email') && invalid.value.trim()
+          ? 'Thông tin chưa đúng định dạng, Quý khách kiểm tra lại giúp em nhé.'
           : 'Quý khách vui lòng điền đầy đủ thông tin giúp em nhé.';
         msg.classList.add('is-error');
         invalid.focus();
@@ -94,10 +100,10 @@
       }
 
       msg.classList.remove('is-error');
-      msg.textContent = 'Đã ghi nhận yêu cầu! Tiến Đức sẽ liên hệ lại với Quý khách trong ít phút.';
+      msg.textContent = form.dataset.successMsg || 'Đã ghi nhận yêu cầu! Tiến Đức sẽ liên hệ lại với Quý khách trong ít phút.';
       form.reset();
       fields.forEach(function (f) {
-        if (f.id === 'f-time') f.type = 'text';
+        if (f.type === 'datetime-local') f.type = 'text';
       });
     });
 
@@ -106,5 +112,5 @@
         e.target.classList.remove('is-error');
       }
     });
-  }
+  });
 })();
