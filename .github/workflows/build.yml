@@ -9,6 +9,9 @@ on:
       # posts.json chưa cập nhật). Xem skill free-cms-static-site-pipeline,
       # static-site-build.md mục 5.
       - "data/posts.json"
+      # Lưu tab "Cài đặt quảng cáo" trong CMS chỉ sinh đúng 1 commit ghi thẳng file này -
+      # tự nó đã là commit chốt, an toàn trigger trực tiếp.
+      - "data/site-config.json"
 
 permissions:
   contents: write
@@ -26,7 +29,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add html/tin-tuc html/sitemap.xml
+          git add html/tin-tuc html/sitemap.xml html/index.html
           git diff --cached --quiet && echo "Không có gì thay đổi, bỏ qua commit." && exit 0
-          git commit -m "CI: build tin tức từ data/posts.json"
+          git commit -m "CI: build tin tức + vá cấu hình quảng cáo từ data/"
           git push

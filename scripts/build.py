@@ -196,6 +196,60 @@ def update_sitemap(all_posts):
         f.write(content)
 
 
+SITE_CONFIG_PATH = os.path.join(DATA_DIR, "site-config.json")
+HOMEPAGE_PATH = os.path.join(HTML_DIR, "index.html")
+ADS_ANCHOR_RE = re.compile(r"<!-- GOOGLE_ADS_CONFIG_START -->.*?<!-- GOOGLE_ADS_CONFIG_END -->", flags=re.S)
+
+
+def patch_homepage_ads_config():
+    """Vá lại vùng cấu hình Google Ads trong html/index.html từ data/site-config.json —
+    kỹ thuật "vá tại chỗ" bằng mốc neo HTML cố định, KHÔNG dùng template cho toàn trang chủ
+    (trang chủ có nhiều phần tuỳ biến không lặp lại - xem skill free-cms-static-site-pipeline,
+    architecture.md mục "Vì sao trang chủ KHÔNG dùng template như các trang khác")."""
+    if not os.path.exists(SITE_CONFIG_PATH):
+        print("  (data/site-config.json không tồn tại, bỏ qua vá trang chủ)")
+        return
+    if not os.path.exists(HOMEPAGE_PATH):
+        print("  (html/index.html không tồn tại, bỏ qua vá trang chủ)")
+        return
+
+    config = load_json(SITE_CONFIG_PATH)
+    tag_id = str(config.get("googleAdsTagId") or "")
+    labels = {
+        "booking": str(config.get("labelBooking") or ""),
+        "call": str(config.get("labelCall") or ""),
+        "zalo": str(config.get("labelZalo") or ""),
+    }
+
+    new_block = (
+        "<script>\n"
+        "      window.GOOGLE_ADS_TAG_ID = " + json.dumps(tag_id) + ";\n"
+        "      window.GOOGLE_ADS_LABELS = { booking: " + json.dumps(labels["booking"]) +
+        ", call: " + json.dumps(labels["call"]) + ", zalo: " + json.dumps(labels["zalo"]) + " };\n"
+        "    </script>"
+    )
+    # Tag ID/label do editor nhập tự do qua CMS - nếu ai đó vô tình gõ "</script>" vào 1 ô,
+    # phải phá literal đó để trình duyệt không đóng thẻ <script> sớm (cùng lỗ hổng XSS đã
+    # vá cho JSON-LD ở json_ld(), xem hàm đó để biết chi tiết).
+    new_block = new_block.replace("</script", "<\\/script")
+
+    replacement = "<!-- GOOGLE_ADS_CONFIG_START -->\n    " + new_block + "\n    <!-- GOOGLE_ADS_CONFIG_END -->"
+
+    with open(HOMEPAGE_PATH, "r", encoding="utf-8") as f:
+        html_content = f.read()
+
+    if not ADS_ANCHOR_RE.search(html_content):
+        print("  CẢNH BÁO: không tìm thấy mốc neo GOOGLE_ADS_CONFIG_START/END trong "
+              "html/index.html - bỏ qua vá cấu hình quảng cáo (trang chủ có thể đã đổi cấu "
+              "trúc, kiểm tra lại thủ công).")
+        return
+
+    html_content = ADS_ANCHOR_RE.sub(lambda m: replacement, html_content, count=1)
+    with open(HOMEPAGE_PATH, "w", encoding="utf-8") as f:
+        f.write(html_content)
+    print("  Đã vá cấu hình Google Ads vào html/index.html")
+
+
 def clean_orphan_html(valid_slugs):
     if not os.path.isdir(NEWS_HTML_DIR):
         return
@@ -238,6 +292,7 @@ def main():
 
     clean_orphan_html(valid_slugs)
     update_sitemap(posts_index)
+    patch_homepage_ads_config()
     print(f"Build xong: {len(posts_index)} bài tin tức.")
 
 

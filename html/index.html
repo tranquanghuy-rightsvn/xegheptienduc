@@ -127,6 +127,29 @@
         "sameAs": ["https://zalo.me/0862933233"]
       }
     </script>
+
+    <!-- Google Ads: Google tag (gtag.js) — CHỈ đặt ở trang chủ (chiến dịch quảng cáo chỉ
+         chạy cho trang chủ). Vùng GOOGLE_ADS_CONFIG do scripts/build.py tự vá lại từ
+         data/site-config.json mỗi khi Lưu "Cài đặt quảng cáo" qua CMS — KHÔNG sửa tay,
+         sẽ bị build tiếp theo ghi đè (xem README.md mục "Quy tắc — đừng sửa nhầm chỗ"). -->
+    <!-- GOOGLE_ADS_CONFIG_START -->
+    <script>
+      window.GOOGLE_ADS_TAG_ID = "";
+      window.GOOGLE_ADS_LABELS = { booking: "", call: "", zalo: "" };
+    <\/script>
+    <!-- GOOGLE_ADS_CONFIG_END -->
+    <script>
+      if (window.GOOGLE_ADS_TAG_ID) {
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { window.dataLayer.push(arguments); };
+        var gtagScript = document.createElement('script');
+        gtagScript.async = true;
+        gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.GOOGLE_ADS_TAG_ID;
+        document.head.appendChild(gtagScript);
+        gtag('js', new Date());
+        gtag('config', window.GOOGLE_ADS_TAG_ID);
+      }
+    </script>
   </head>
   <body>
     <!-- ============ SVG ICON SPRITE ============ -->
@@ -1034,5 +1057,6 @@
 
     <script src="js/main.js"></script>
     <script src="js/place-autocomplete.js"></script>
+    <script src="js/ads-tracking.js"></script>
   </body>
 </html>

@@ -164,6 +164,10 @@
           .then(function (json) {
             if (json && json.ok) {
               showSuccess();
+              // Báo cho ads-tracking.js (nếu có, chỉ tồn tại ở trang chủ) rằng vừa có 1
+              // chuyển đổi thật (không phải bot, không phải demo mode) - main.js cố tình
+              // không biết gì về Google Ads, chỉ phát 1 sự kiện DOM chung.
+              document.dispatchEvent(new CustomEvent('tienduc:conversion', { detail: { type: apiAction } }));
             } else {
               msg.classList.add('is-error');
               msg.textContent = 'Có lỗi xảy ra, Quý khách vui lòng gọi trực tiếp hotline 0862 933 233 giúp em nhé.';
