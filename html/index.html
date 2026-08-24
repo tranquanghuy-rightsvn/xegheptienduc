@@ -237,7 +237,7 @@
             <li><a href="#tuyen-xe">TUYẾN XE</a></li>
             <li><a href="#bang-gia">BẢNG GIÁ</a></li>
             <li><a href="#dat-xe">ĐẶT XE</a></li>
-            <li><a href="#tin-tuc">TIN TỨC</a></li>
+            <li><a href="tin-tuc/index.html">TIN TỨC</a></li>
             <li><a href="lien-he/index.html">LIÊN HỆ</a></li>
           </ul>
         </div>
@@ -523,27 +523,41 @@
                   <label class="field__label" for="f-pickup"
                     ><svg class="ic"><use href="#i-pin" /></svg>Điểm đón</label
                   >
-                  <input
-                    class="field__input"
-                    id="f-pickup"
-                    name="pickup"
-                    type="text"
-                    placeholder="Nhập điểm đón"
-                    required
-                  />
+                  <div class="field__autocomplete">
+                    <input
+                      class="field__input js-place-autocomplete"
+                      id="f-pickup"
+                      name="pickup"
+                      type="text"
+                      placeholder="Nhập điểm đón"
+                      autocomplete="off"
+                      role="combobox"
+                      aria-autocomplete="list"
+                      aria-expanded="false"
+                      required
+                    />
+                    <ul class="autocomplete-list" id="f-pickup-list" role="listbox" hidden></ul>
+                  </div>
                 </div>
                 <div class="field">
                   <label class="field__label" for="f-drop"
                     ><svg class="ic"><use href="#i-pin" /></svg>Điểm trả</label
                   >
-                  <input
-                    class="field__input"
-                    id="f-drop"
-                    name="drop"
-                    type="text"
-                    placeholder="Nhập điểm trả"
-                    required
-                  />
+                  <div class="field__autocomplete">
+                    <input
+                      class="field__input js-place-autocomplete"
+                      id="f-drop"
+                      name="drop"
+                      type="text"
+                      placeholder="Nhập điểm trả"
+                      autocomplete="off"
+                      role="combobox"
+                      aria-autocomplete="list"
+                      aria-expanded="false"
+                      required
+                    />
+                    <ul class="autocomplete-list" id="f-drop-list" role="listbox" hidden></ul>
+                  </div>
                 </div>
                 <div class="field">
                   <label class="field__label" for="f-time"
@@ -918,5 +932,6 @@
     </a>
 
     <script src="js/main.js"></script>
+    <script src="js/place-autocomplete.js"></script>
   </body>
 </html>
