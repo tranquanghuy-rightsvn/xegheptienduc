@@ -4,6 +4,11 @@
 (function () {
   'use strict';
 
+  /* Dán URL /exec của Web App Google Apps Script vào đây sau khi deploy CMS (xem
+     gas/README.md). Rỗng = form vẫn validate/hiện thông báo cục bộ như trước nhưng
+     KHÔNG gửi đi đâu — chỉ để tránh vỡ trang khi chưa deploy xong CMS. */
+  var GAS_EXEC_URL = '';
+
   /* ---------- 1. Mobile menu ---------- */
   var toggle = document.querySelector('.nav-toggle');
   var navlist = document.getElementById('navlist');
@@ -64,12 +69,30 @@
     window.scrollTo({ top: top < 0 ? 0 : top, behavior: 'smooth' });
   });
 
-  /* ---------- 4. Form đặt xe / liên hệ (xử lý cục bộ, không gọi API) ---------- */
+  /* ---------- 4. Form đặt xe / liên hệ ----------
+     Validate cục bộ như cũ, sau đó gửi thật lên GAS doPost() qua fetch(). Content-Type
+     text/plain (không phải application/json) để request ở lại dạng "simple request" —
+     trình duyệt không gửi OPTIONS preflight trước, vì GAS không xử lý được OPTIONS (xem
+     skill free-cms-static-site-pipeline, gas-backend-patterns.md mục 6). */
   var forms = Array.prototype.slice.call(document.querySelectorAll('form[novalidate]'));
+
+  function withLoading(button, run) {
+    if (!button) return run();
+    var originalText = button.innerHTML;
+    button.disabled = true;
+    button.innerHTML = 'Đang gửi...';
+    return run().finally(function () {
+      button.disabled = false;
+      button.innerHTML = originalText;
+    });
+  }
 
   forms.forEach(function (form) {
     var msg = form.querySelector('[role="status"]');
     if (!msg) return;
+
+    var submitBtn = form.querySelector('button[type="submit"]');
+    var apiAction = form.dataset.apiAction || '';
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -99,11 +122,57 @@
         return;
       }
 
-      msg.classList.remove('is-error');
-      msg.textContent = form.dataset.successMsg || 'Đã ghi nhận yêu cầu! Tiến Đức sẽ liên hệ lại với Quý khách trong ít phút.';
-      form.reset();
+      // Honeypot: field ẩn bằng CSS (.hp-field), người dùng thật không bao giờ điền.
+      // Bot form-filler tự động điền vào mọi input kể cả ẩn — có giá trị là biết ngay bot.
+      // Âm thầm báo "thành công" (không gửi gì) để không "dạy" bot biết nó bị phát hiện.
+      var hp = form.querySelector('input[name="_hp"]');
+      var isBot = hp && hp.value.trim();
+
+      function showSuccess() {
+        msg.classList.remove('is-error');
+        msg.textContent = form.dataset.successMsg || 'Đã ghi nhận yêu cầu! Tiến Đức sẽ liên hệ lại với Quý khách trong ít phút.';
+        form.reset();
+        fields.forEach(function (f) {
+          if (f.type === 'datetime-local') f.type = 'text';
+        });
+      }
+
+      if (isBot) {
+        showSuccess();
+        return;
+      }
+
+      if (!GAS_EXEC_URL || !apiAction) {
+        // Chưa deploy CMS / chưa dán URL — vẫn hiện thông báo để không vỡ trải nghiệm
+        // demo, nhưng KHÔNG gửi đi đâu cả.
+        showSuccess();
+        return;
+      }
+
+      var payload = { formType: apiAction, _hp: '' };
       fields.forEach(function (f) {
-        if (f.type === 'datetime-local') f.type = 'text';
+        if (f.name) payload[f.name] = f.value.trim();
+      });
+
+      withLoading(submitBtn, function () {
+        return fetch(GAS_EXEC_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload),
+        })
+          .then(function (res) { return res.json(); })
+          .then(function (json) {
+            if (json && json.ok) {
+              showSuccess();
+            } else {
+              msg.classList.add('is-error');
+              msg.textContent = 'Có lỗi xảy ra, Quý khách vui lòng gọi trực tiếp hotline 0862 933 233 giúp em nhé.';
+            }
+          })
+          .catch(function () {
+            msg.classList.add('is-error');
+            msg.textContent = 'Không gửi được yêu cầu (lỗi mạng), Quý khách vui lòng gọi trực tiếp hotline 0862 933 233 giúp em nhé.';
+          });
       });
     });
 

@@ -1,0 +1,4 @@
+.DS_Store
+
+# Code CMS Google Apps Script — deploy qua clasp, không qua git (xem gas/README.md)
+gas/

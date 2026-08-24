@@ -554,6 +554,14 @@ button,input{font:inherit;color:inherit}
 }
 .booking__msg.is-error{color:#ffb4a8}
 
+/* Honeypot chống bot form-filler: ẩn khỏi mắt người dùng thật (CSS, không phải hidden
+   attribute — bot đọc DOM vẫn thấy field và tự điền, người dùng thật không bao giờ thấy
+   để điền nhầm). Field có giá trị khi submit = chắc chắn là bot. */
+.hp-field{
+  position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;
+}
+.btn--gold[disabled]{opacity:.65;cursor:default;pointer-events:none}
+
 /* =====================================================================
    TUYẾN XE
    ===================================================================== */

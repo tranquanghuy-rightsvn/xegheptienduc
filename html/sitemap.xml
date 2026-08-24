@@ -19,14 +19,8 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://tienductransport.vn/tin-tuc/luu-y-dat-xe-san-bay-cat-bi.html</loc>
-    <lastmod>2026-08-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://tienductransport.vn/tin-tuc/cam-nang-du-lich-ha-long-cat-ba.html</loc>
-    <lastmod>2026-08-08</lastmod>
+    <loc>https://tienductransport.vn/tin-tuc/kinh-nghiem-di-xe-ghep-ha-long-hai-phong.html</loc>
+    <lastmod>2026-08-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -37,8 +31,14 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://tienductransport.vn/tin-tuc/kinh-nghiem-di-xe-ghep-ha-long-hai-phong.html</loc>
-    <lastmod>2026-08-20</lastmod>
+    <loc>https://tienductransport.vn/tin-tuc/cam-nang-du-lich-ha-long-cat-ba.html</loc>
+    <lastmod>2026-08-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://tienductransport.vn/tin-tuc/luu-y-dat-xe-san-bay-cat-bi.html</loc>
+    <lastmod>2026-08-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

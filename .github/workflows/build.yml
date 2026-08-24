@@ -1,0 +1,32 @@
+name: Build Tin tức từ data/
+
+on:
+  push:
+    branches: [master]
+    paths:
+      # Chỉ trigger ở file LUÔN là commit chốt của CMS (index tổng) — không trigger theo
+      # cả thư mục data/**, tránh build ở commit dở dang (vd ảnh đã push nhưng
+      # posts.json chưa cập nhật). Xem skill free-cms-static-site-pipeline,
+      # static-site-build.md mục 5.
+      - "data/posts.json"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build html/tin-tuc từ data/
+        run: python3 scripts/build.py
+
+      - name: Commit & push nếu có thay đổi
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add html/tin-tuc html/sitemap.xml
+          git diff --cached --quiet && echo "Không có gì thay đổi, bỏ qua commit." && exit 0
+          git commit -m "CI: build tin tức từ data/posts.json"
+          git push
