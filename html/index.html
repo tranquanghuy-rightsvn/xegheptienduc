@@ -205,11 +205,17 @@
         <div class="booking__box">
           <div class="field">
             <label class="field__label" for="f-pickup"><svg class="ic"><use href="#i-pin"/></svg>Điểm đón</label>
-            <input class="field__input" id="f-pickup" name="pickup" type="text" placeholder="Nhập điểm đón" required>
+            <div class="field__input-wrap">
+              <input class="field__input place-autocomplete-input" id="f-pickup" name="pickup" type="text" placeholder="Nhập điểm đón" autocomplete="off" required>
+              <ul class="address-suggestions" hidden></ul>
+            </div>
           </div>
           <div class="field">
             <label class="field__label" for="f-drop"><svg class="ic"><use href="#i-pin"/></svg>Điểm trả</label>
-            <input class="field__input" id="f-drop" name="drop" type="text" placeholder="Nhập điểm trả" required>
+            <div class="field__input-wrap">
+              <input class="field__input place-autocomplete-input" id="f-drop" name="drop" type="text" placeholder="Nhập điểm trả" autocomplete="off" required>
+              <ul class="address-suggestions" hidden></ul>
+            </div>
           </div>
           <div class="field">
             <label class="field__label" for="f-time"><svg class="ic"><use href="#i-calendar"/></svg>Thời gian đi</label>
@@ -403,6 +409,8 @@
   <svg class="ic"><use href="#i-phone"/></svg>
 </a>
 
+<script src="js/tienduc-api.js"></script>
+<script src="js/tienduc-address-autocomplete.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
