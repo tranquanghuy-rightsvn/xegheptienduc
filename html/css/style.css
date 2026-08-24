@@ -533,24 +533,6 @@ button,input{font:inherit;color:inherit}
 .field__input:focus{outline:0;border-color:var(--gold);box-shadow:0 0 0 3px rgba(216,164,65,.18)}
 .field__input.is-error{border-color:#c0392b;box-shadow:0 0 0 3px rgba(192,57,43,.12)}
 
-/* Dropdown gợi ý địa chỉ (autocomplete điểm đón/điểm trả) */
-.field__input-wrap{position:relative;width:100%}
-.address-suggestions{
-  position:absolute;top:calc(100% + 4px);left:0;right:0;width:auto;max-width:100%;
-  box-sizing:border-box;z-index:20;margin:0;padding:6px;list-style:none;
-  background:#fff;border:1px solid #dcd8d0;border-radius:8px;
-  box-shadow:0 12px 30px rgba(0,0,0,.16);max-height:240px;overflow-y:auto;overflow-x:hidden;
-}
-.address-suggestions[hidden]{display:none}
-.address-suggestion-item{
-  padding:9px 10px;font-size:13px;font-family:var(--ff-body);font-weight:500;
-  border-radius:6px;cursor:pointer;color:#4a5049;overflow-wrap:break-word;word-break:break-all;max-width:100%;
-}
-.address-suggestion-item strong{color:#16281d}
-.address-suggestion-item:hover,
-.address-suggestion-item.active{background:#fbf3e2;color:var(--gold-d)}
-.address-suggestion-item:hover strong,
-.address-suggestion-item.active strong{color:var(--gold-d)}
 .booking__msg{
   font-size:12.5px;font-weight:600;text-align:center;color:var(--gold-l);
 }

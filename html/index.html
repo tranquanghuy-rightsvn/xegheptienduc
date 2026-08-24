@@ -205,16 +205,16 @@
         <div class="booking__box">
           <div class="field">
             <label class="field__label" for="f-pickup"><svg class="ic"><use href="#i-pin"/></svg>Điểm đón</label>
-            <div class="field__input-wrap">
-              <input class="field__input place-autocomplete-input" id="f-pickup" name="pickup" type="text" placeholder="Nhập điểm đón" autocomplete="off" required>
-              <ul class="address-suggestions" hidden></ul>
+            <div class="field__autocomplete">
+              <input class="field__input js-place-autocomplete" id="f-pickup" name="pickup" type="text" placeholder="Nhập điểm đón" autocomplete="off" role="combobox" aria-expanded="false" required>
+              <ul class="autocomplete-list" hidden></ul>
             </div>
           </div>
           <div class="field">
             <label class="field__label" for="f-drop"><svg class="ic"><use href="#i-pin"/></svg>Điểm trả</label>
-            <div class="field__input-wrap">
-              <input class="field__input place-autocomplete-input" id="f-drop" name="drop" type="text" placeholder="Nhập điểm trả" autocomplete="off" required>
-              <ul class="address-suggestions" hidden></ul>
+            <div class="field__autocomplete">
+              <input class="field__input js-place-autocomplete" id="f-drop" name="drop" type="text" placeholder="Nhập điểm trả" autocomplete="off" role="combobox" aria-expanded="false" required>
+              <ul class="autocomplete-list" hidden></ul>
             </div>
           </div>
           <div class="field">
@@ -409,8 +409,7 @@
   <svg class="ic"><use href="#i-phone"/></svg>
 </a>
 
-<script src="js/tienduc-api.js"></script>
-<script src="js/tienduc-address-autocomplete.js"></script>
+<script src="js/place-autocomplete.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
