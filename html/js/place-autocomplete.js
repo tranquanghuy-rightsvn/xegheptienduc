@@ -1,74 +1,57 @@
 /* =====================================================================
    TIẾN ĐỨC — gợi ý địa điểm (Điểm đón / Điểm trả)
-   Dùng "Vietnam Provinces API" (provinces.open-api.vn) — API hành chính
-   Việt Nam miễn phí, không cần key. Toàn bộ danh sách Tỉnh/Thành và
-   Phường/Xã (~3.300 đơn vị, ~340KB) được tải một lần rồi tìm kiếm ngay
-   trên trình duyệt (không gọi lại API mỗi lần gõ phím).
+   Dùng đúng API backend của xevip (api.xevipsanbay.com — Goong Maps autocomplete),
+   theo yêu cầu dùng chung API giữa 2 dự án. Backend giới hạn CORS theo origin đã đăng ký
+   phía họ — cần domain của Tiến Đức được thêm vào whitelist mới gọi thành công khi deploy
+   thật; không quan tâm việc đó ở đây theo yêu cầu, chỉ tập trung đúng cơ chế gọi.
    ===================================================================== */
 (function () {
   'use strict';
 
-  var MIN_CHARS = 2;
-  var MAX_RESULTS = 8;
-  var API_BASE = 'https://provinces.open-api.vn/api/v2/';
+  var API_BASE = 'https://api.xevipsanbay.com';
+  var DEBOUNCE_MS = 250;
 
   var inputs = Array.prototype.slice.call(document.querySelectorAll('.js-place-autocomplete'));
   if (!inputs.length) return;
 
-  function normalize(str) {
-    return str
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .replace(/đ/g, 'd')
-      .replace(/Đ/g, 'D')
-      .toLowerCase()
-      .trim();
+  function buildQuery(params) {
+    return Object.keys(params)
+      .filter(function (k) { return params[k] !== undefined && params[k] !== null && params[k] !== ''; })
+      .map(function (k) { return encodeURIComponent(k) + '=' + encodeURIComponent(params[k]); })
+      .join('&');
   }
 
-  /* ---------- Tải dữ liệu Tỉnh/Thành + Phường/Xã một lần, dùng chung cho mọi ô ---------- */
-  var placesReady = Promise.all([
-    fetch(API_BASE + 'p/').then(function (r) { return r.json(); }),
-    fetch(API_BASE + 'w/').then(function (r) { return r.json(); }),
-  ]).then(function (res) {
-    var provinces = res[0];
-    var wards = res[1];
-
-    var provinceByCode = {};
-    provinces.forEach(function (p) { provinceByCode[p.code] = p.name; });
-
-    var places = provinces.map(function (p) {
-      return { label: p.name, norm: normalize(p.name) };
-    });
-
-    wards.forEach(function (w) {
-      var provinceName = provinceByCode[w.province_code];
-      var label = provinceName ? w.name + ', ' + provinceName : w.name;
-      places.push({ label: label, norm: normalize(label) });
-    });
-
-    return places;
-  });
-
-  function search(places, query) {
-    var q = normalize(query);
-    var matches = [];
-    for (var i = 0; i < places.length; i++) {
-      var idx = places[i].norm.indexOf(q);
-      if (idx !== -1) matches.push({ label: places[i].label, rank: idx });
-    }
-    matches.sort(function (a, b) {
-      return a.rank - b.rank || a.label.length - b.label.length;
-    });
-    return matches.slice(0, MAX_RESULTS).map(function (m) { return m.label; });
+  // GET /v1/goong-map/autocomplete — trả nguyên mảng predictions (object đầy đủ, không chỉ
+  // description) để có thể dùng lại sau này nếu cần gửi kèm khi đặt xe.
+  function fetchSuggestions(input) {
+    if (!input || !input.trim()) return Promise.resolve([]);
+    var qs = buildQuery({ input: input, has_deprecated_administrative_unit: true });
+    return fetch(API_BASE + '/v1/goong-map/autocomplete?' + qs)
+      .then(function (res) { return res.json(); })
+      .then(function (json) {
+        if (!json || !json.success) {
+          console.error('[place-autocomplete] Lỗi tìm địa chỉ:', json);
+          return [];
+        }
+        return (json.data && json.data.predictions) || [];
+      })
+      .catch(function (err) {
+        console.error('[place-autocomplete] Không gọi được goong-map/autocomplete:', err);
+        return [];
+      });
   }
 
-  inputs.forEach(function (input) {
+  var selectedAddressByInput = new WeakMap();
+
+  function attach(input) {
     var wrap = input.closest('.field__autocomplete');
     var list = wrap ? wrap.querySelector('.autocomplete-list') : null;
     if (!list) return;
 
     var items = [];
     var activeIndex = -1;
+    var debounceTimer = null;
+    var requestSeq = 0;
 
     function closeList() {
       list.hidden = true;
@@ -79,22 +62,36 @@
     }
 
     function renderMessage(text) {
-      list.innerHTML = '<li class="autocomplete-msg">' + text + '</li>';
+      list.innerHTML = '';
+      var li = document.createElement('li');
+      li.className = 'autocomplete-msg';
+      li.textContent = text;
+      list.appendChild(li);
       list.hidden = false;
     }
 
-    function renderItems(labels) {
-      items = labels;
+    function renderItems(predictions) {
+      items = predictions;
       activeIndex = -1;
-      if (!labels.length) {
-        renderMessage('Không tìm thấy địa danh phù hợp');
+      if (!predictions.length) {
+        renderMessage('Không tìm thấy địa điểm phù hợp');
         return;
       }
-      list.innerHTML = labels
-        .map(function (label, i) {
-          return '<li class="autocomplete-item" role="option" data-index="' + i + '">' + label + '</li>';
-        })
-        .join('');
+      list.innerHTML = '';
+      predictions.forEach(function (item, i) {
+        var fmt = item.structured_formatting || {};
+        var main = fmt.main_text || item.description || '';
+        var rest = fmt.secondary_text || '';
+        var li = document.createElement('li');
+        li.className = 'autocomplete-item';
+        li.setAttribute('role', 'option');
+        li.dataset.index = i;
+        var strong = document.createElement('strong');
+        strong.textContent = main;
+        li.appendChild(strong);
+        if (rest) li.appendChild(document.createTextNode(', ' + rest));
+        list.appendChild(li);
+      });
       list.hidden = false;
       input.setAttribute('aria-expanded', 'true');
     }
@@ -109,33 +106,29 @@
       activeIndex = index;
     }
 
-    function selectItem(index) {
-      if (!items[index]) return;
-      input.value = items[index];
+    function selectItem(item) {
+      input.value = item.description || '';
+      selectedAddressByInput.set(input, item);
       closeList();
     }
 
     input.addEventListener('input', function () {
-      var value = input.value.trim();
-      if (value.length < MIN_CHARS) {
-        closeList();
-        return;
-      }
+      selectedAddressByInput.delete(input);
+      var value = input.value;
+      var seq = ++requestSeq;
+      clearTimeout(debounceTimer);
+      if (!value.trim()) { closeList(); return; }
 
-      renderMessage('Đang tải dữ liệu địa danh...');
-
-      placesReady
-        .then(function (places) {
-          if (input.value.trim() !== value) return; // đã gõ tiếp, bỏ kết quả cũ
-          renderItems(search(places, value));
-        })
-        .catch(function () {
-          renderMessage('Không thể tải dữ liệu địa danh, vui lòng thử lại');
+      renderMessage('Đang tìm...');
+      debounceTimer = setTimeout(function () {
+        fetchSuggestions(value).then(function (predictions) {
+          if (seq === requestSeq) renderItems(predictions);
         });
+      }, DEBOUNCE_MS);
     });
 
     input.addEventListener('keydown', function (e) {
-      if (list.hidden) return;
+      if (list.hidden || !items.length) return;
       if (e.key === 'ArrowDown') {
         e.preventDefault();
         highlight(Math.min(activeIndex + 1, items.length - 1));
@@ -143,24 +136,28 @@
         e.preventDefault();
         highlight(Math.max(activeIndex - 1, 0));
       } else if (e.key === 'Enter') {
-        if (activeIndex >= 0) {
-          e.preventDefault();
-          selectItem(activeIndex);
-        }
+        if (activeIndex >= 0) { e.preventDefault(); selectItem(items[activeIndex]); }
       } else if (e.key === 'Escape') {
         closeList();
       }
     });
 
     list.addEventListener('mousedown', function (e) {
-      var item = e.target.closest('.autocomplete-item');
-      if (!item) return;
+      var li = e.target.closest('.autocomplete-item');
+      if (!li) return;
       e.preventDefault();
-      selectItem(Number(item.dataset.index));
+      var idx = Number(li.dataset.index);
+      if (items[idx]) selectItem(items[idx]);
     });
 
     document.addEventListener('click', function (e) {
       if (e.target !== input && !list.contains(e.target)) closeList();
     });
-  });
+  }
+
+  inputs.forEach(attach);
+
+  window.PlaceAutocomplete = {
+    getSelectedAddress: function (input) { return selectedAddressByInput.get(input) || null; },
+  };
 })();
