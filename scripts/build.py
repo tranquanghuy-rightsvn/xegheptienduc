@@ -64,6 +64,36 @@ def date_display(iso_date):
     return f"{d}/{m}/{y}"
 
 
+def get_image_info(path):
+    """Đọc width/height/mime thật từ magic bytes (PNG/JPEG), không tin đuôi file - vd
+    html/images/hero-banner.jpg thực chất là PNG dù đuôi .jpg. og:image:width/height sai
+    khiến Facebook/Zalo crop preview lệch, nên phải lấy từ nội dung file thật."""
+    with open(path, "rb") as f:
+        head = f.read(24)
+        if head[:8] == b"\x89PNG\r\n\x1a\n":
+            width = int.from_bytes(head[16:20], "big")
+            height = int.from_bytes(head[20:24], "big")
+            return width, height, "image/png"
+        if head[:2] == b"\xff\xd8":
+            f.seek(2)
+            while True:
+                marker = f.read(2)
+                if len(marker) < 2 or marker[0] != 0xFF:
+                    break
+                code = marker[1]
+                if code in (0xC0, 0xC1, 0xC2, 0xC3, 0xC5, 0xC6, 0xC7,
+                            0xC9, 0xCA, 0xCB, 0xCD, 0xCE, 0xCF):
+                    f.read(3)
+                    height = int.from_bytes(f.read(2), "big")
+                    width = int.from_bytes(f.read(2), "big")
+                    return width, height, "image/jpeg"
+                if code in (0xD8, 0xD9):
+                    continue
+                length = int.from_bytes(f.read(2), "big")
+                f.seek(length - 2, 1)
+    raise ValueError(f"Không đọc được kích thước ảnh (không phải PNG/JPEG?): {path}")
+
+
 def render_placeholders(tpl, mapping):
     # re.sub thay thế trong 1 lượt quét duy nhất trên chuỗi TEMPLATE GỐC, không quét lại
     # phần vừa được chèn vào - khác với gọi .replace() tuần tự từng key một (sẽ có bug thật:
@@ -112,13 +142,20 @@ def render_post_page(tpl, post, all_posts):
     slug = post["slug"]
     canonical = f"{SITE_URL}/tin-tuc/{slug}.html"
     og_image = f"{SITE_URL}/images/{post['cover']}"
+    cover_path = os.path.join(HTML_DIR, "images", post["cover"])
+    cover_w, cover_h, cover_type = get_image_info(cover_path)
 
     jsonld_article = json_ld({
         "@context": "https://schema.org",
         "@type": "Article",
         "headline": post["title"],
         "description": post["description"],
-        "image": og_image,
+        "image": {
+            "@type": "ImageObject",
+            "url": og_image,
+            "width": cover_w,
+            "height": cover_h,
+        },
         "datePublished": post["date"],
         "dateModified": post.get("updated_date", post["date"]),
         "author": {"@type": "Organization", "name": "Tiến Đức", "url": f"{SITE_URL}/"},
@@ -145,6 +182,10 @@ def render_post_page(tpl, post, all_posts):
         "DESCRIPTION": esc(post["description"]),
         "CANONICAL_URL": canonical,
         "OG_IMAGE": og_image,
+        "OG_IMAGE_WIDTH": str(cover_w),
+        "OG_IMAGE_HEIGHT": str(cover_h),
+        "OG_IMAGE_TYPE": cover_type,
+        "OG_IMAGE_ALT": esc(post["cover_alt"]),
         "JSONLD_ARTICLE": jsonld_article,
         "JSONLD_BREADCRUMB": jsonld_breadcrumb,
         "BREADCRUMB": esc(post["breadcrumb"]),
@@ -189,6 +230,10 @@ def update_sitemap(all_posts):
             f"    <lastmod>{p.get('updated_date', p['date'])}</lastmod>\n"
             "    <changefreq>monthly</changefreq>\n"
             "    <priority>0.6</priority>\n"
+            "    <image:image>\n"
+            f"      <image:loc>{SITE_URL}/images/{p['cover']}</image:loc>\n"
+            f"      <image:title>{esc(p['title'])}</image:title>\n"
+            "    </image:image>\n"
             "  </url>\n"
         )
     content = content.replace("</urlset>\n", "").rstrip("\n") + "\n" + "".join(entries) + "</urlset>\n"

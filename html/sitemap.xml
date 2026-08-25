@@ -1,45 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://tienductransport.vn/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://tienductransport.vn/images/banner.jpg</image:loc>
+      <image:title>Nhà Xe Tiến Đức Hạ Long</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://tienductransport.vn/lien-he/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://tienductransport.vn/images/hero-banner.jpg</image:loc>
+      <image:title>Liên hệ Nhà Xe Tiến Đức Hạ Long</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://tienductransport.vn/tin-tuc/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://tienductransport.vn/images/hero-banner.jpg</image:loc>
+      <image:title>Tin tức Nhà Xe Tiến Đức Hạ Long</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://tienductransport.vn/tin-tuc/kinh-nghiem-di-xe-ghep-ha-long-hai-phong.html</loc>
     <lastmod>2026-08-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://tienductransport.vn/images/svc-1-xe-ghep-tien-chuyen.jpg</image:loc>
+      <image:title>Kinh Nghiệm Chọn Xe Ghép Hạ Long – Hải Phòng Tiết Kiệm Và An Toàn</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://tienductransport.vn/tin-tuc/xe-dien-vinfast-va-xe-xang-khac-nhau-the-nao.html</loc>
     <lastmod>2026-08-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://tienductransport.vn/images/hero-banner.jpg</image:loc>
+      <image:title>Xe Điện VinFast Có Gì Khác So Với Xe Xăng Truyền Thống?</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://tienductransport.vn/tin-tuc/cam-nang-du-lich-ha-long-cat-ba.html</loc>
     <lastmod>2026-08-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://tienductransport.vn/images/svc-5-du-lich.jpg</image:loc>
+      <image:title>Cẩm Nang Du Lịch Hạ Long – Cát Bà Cho Người Mới Đi Lần Đầu</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://tienductransport.vn/tin-tuc/luu-y-dat-xe-san-bay-cat-bi.html</loc>
     <lastmod>2026-08-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://tienductransport.vn/images/svc-3-dua-don-san-bay.jpg</image:loc>
+      <image:title>5 Lưu Ý Khi Đặt Xe Đưa Đón Sân Bay Cát Bi</image:title>
+    </image:image>
   </url>
 </urlset>
