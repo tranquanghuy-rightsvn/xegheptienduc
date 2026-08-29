@@ -140,7 +140,9 @@ def build_post_cards(all_posts):
 
 def render_post_page(tpl, post, all_posts):
     slug = post["slug"]
-    canonical = f"{SITE_URL}/tin-tuc/{slug}.html"
+    # Host (Cloudflare) tự 307 redirect /tin-tuc/<slug>.html -> /tin-tuc/<slug>, nên URL
+    # KHÔNG đuôi .html mới là URL thật. File trên đĩa vẫn tên <slug>.html (không đổi).
+    canonical = f"{SITE_URL}/tin-tuc/{slug}"
     og_image = f"{SITE_URL}/images/{post['cover']}"
     cover_path = os.path.join(HTML_DIR, "images", post["cover"])
     cover_w, cover_h, cover_type = get_image_info(cover_path)
@@ -211,9 +213,11 @@ def update_sitemap(all_posts):
     with open(SITEMAP_PATH, "r", encoding="utf-8") as f:
         content = f.read()
 
-    # Xoá mọi <url> trỏ tới tin-tuc/*.html hiện có (giữ nguyên / , /lien-he/ , /tin-tuc/)
+    # Xoá mọi <url> trỏ tới bài viết trong tin-tuc/ hiện có (giữ nguyên / , /lien-he/ ,
+    # /tin-tuc/). Khớp cả URL cũ có đuôi .html lẫn URL mới không đuôi; [^/<]+ bắt buộc
+    # có ít nhất 1 ký tự nên entry /tin-tuc/ (trang danh sách) không bị dính.
     content = re.sub(
-        r'[ \t]*<url>\s*<loc>[^<]*?/tin-tuc/[^/]+\.html</loc>.*?</url>\s*\n?',
+        r'[ \t]*<url>\s*<loc>[^<]*?/tin-tuc/[^/<]+(?:\.html)?</loc>.*?</url>\s*\n?',
         "",
         content,
         flags=re.S,
@@ -224,7 +228,7 @@ def update_sitemap(all_posts):
     for p in all_posts:
         entries.append(
             "  <url>\n"
-            f"    <loc>{SITE_URL}/tin-tuc/{p['slug']}.html</loc>\n"
+            f"    <loc>{SITE_URL}/tin-tuc/{p['slug']}</loc>\n"
             f"    <lastmod>{p.get('updated_date', p['date'])}</lastmod>\n"
             "    <changefreq>monthly</changefreq>\n"
             "    <priority>0.6</priority>\n"
