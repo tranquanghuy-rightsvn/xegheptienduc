@@ -865,6 +865,19 @@ textarea.field__input{resize:vertical;min-height:78px;line-height:1.45;padding-t
 .article__body ul li{display:flex;align-items:flex-start;gap:10px}
 .article__body ul li .ic{font-size:15px;color:#1e8f4e;margin-top:4px;flex:none}
 .article__body strong{color:var(--ink);font-weight:700}
+.article__body table{width:100%;border-collapse:collapse;margin:0 0 16px;font-size:14px}
+.article__body table th,.article__body table td{
+  padding:10px 12px;border:1px solid var(--line-soft);text-align:left;
+}
+.article__body table th{background:var(--cream);color:var(--ink);font-weight:700}
+.article__body figure{margin:0 0 20px}
+.article__body figure img{
+  width:100%;display:block;border-radius:var(--r-card);border:1px solid var(--line);
+  box-shadow:var(--shadow);
+}
+.article__body figcaption{
+  margin-top:8px;font-size:13px;color:var(--muted);text-align:center;font-style:italic;
+}
 
 .article__cta{
   margin-top:32px;padding:22px 24px;text-align:center;

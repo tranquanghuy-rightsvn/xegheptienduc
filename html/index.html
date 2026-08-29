@@ -3,6 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Google tag (gtag.js) — Google Analytics 4, đặt trên MỌI trang -->
+    <!-- GA4_START -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TVCTWE78P3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-TVCTWE78P3');
+    </script>
+    <!-- GA4_END -->
     <title>Nhà Xe Tiến Đức Hạ Long - Xe Ghép Hạ Long <=> Hải Phòng</title>
     <meta
       name="description"
@@ -150,17 +160,22 @@
     <script>
       window.GOOGLE_ADS_TAG_ID = "";
       window.GOOGLE_ADS_LABELS = { booking: "", call: "", zalo: "" };
-    <\/script>
+    </script>
     <!-- GOOGLE_ADS_CONFIG_END -->
     <script>
       if (window.GOOGLE_ADS_TAG_ID) {
+        // gtag.js đã được nạp sẵn bởi khối Google Analytics 4 ở đầu <head>, nên ở đây chỉ
+        // cần config thêm ID Google Ads vào cùng một dataLayer. Nhánh fallback phía dưới
+        // giữ lại phòng khi khối GA4 bị gỡ.
         window.dataLayer = window.dataLayer || [];
-        window.gtag = function () { window.dataLayer.push(arguments); };
-        var gtagScript = document.createElement('script');
-        gtagScript.async = true;
-        gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.GOOGLE_ADS_TAG_ID;
-        document.head.appendChild(gtagScript);
-        gtag('js', new Date());
+        if (typeof window.gtag !== 'function') {
+          window.gtag = function () { window.dataLayer.push(arguments); };
+          var gtagScript = document.createElement('script');
+          gtagScript.async = true;
+          gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.GOOGLE_ADS_TAG_ID;
+          document.head.appendChild(gtagScript);
+          gtag('js', new Date());
+        }
         gtag('config', window.GOOGLE_ADS_TAG_ID);
       }
     </script>

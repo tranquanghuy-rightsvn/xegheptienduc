@@ -97,8 +97,8 @@ def get_image_info(path):
 def render_placeholders(tpl, mapping):
     # re.sub thay thế trong 1 lượt quét duy nhất trên chuỗi TEMPLATE GỐC, không quét lại
     # phần vừa được chèn vào - khác với gọi .replace() tuần tự từng key một (sẽ có bug thật:
-    # nếu nội dung bài viết do editor nhập tự do vô tình chứa đúng literal "{{CTA_TITLE}}",
-    # cách .replace() tuần tự sẽ thay nhầm nó ở bước xử lý CTA_TITLE sau đó, dù đó là text
+    # nếu nội dung bài viết do editor nhập tự do vô tình chứa đúng literal "{{BREADCRUMB}}",
+    # cách .replace() tuần tự sẽ thay nhầm nó ở bước xử lý BREADCRUMB sau đó, dù đó là text
     # bình thường trong content_html, không phải placeholder thật của template).
     pattern = re.compile(r"\{\{(\w+)\}\}")
     return pattern.sub(lambda m: mapping.get(m.group(1), m.group(0)), tpl)
@@ -195,8 +195,6 @@ def render_post_page(tpl, post, all_posts):
         "COVER": esc(post["cover"]),
         "COVER_ALT": esc(post["cover_alt"]),
         "CONTENT_HTML": post["content_html"],  # đã là HTML thật, không escape
-        "CTA_TITLE": esc(post["cta_title"]),
-        "CTA_DESC": esc(post["cta_desc"]),
         "RELATED_CARDS": build_related_cards(all_posts, slug),
     }
     return render_placeholders(tpl, mapping)
@@ -266,17 +264,21 @@ def patch_homepage_ads_config():
         "zalo": str(config.get("labelZalo") or ""),
     }
 
-    new_block = (
-        "<script>\n"
-        "      window.GOOGLE_ADS_TAG_ID = " + json.dumps(tag_id) + ";\n"
-        "      window.GOOGLE_ADS_LABELS = { booking: " + json.dumps(labels["booking"]) +
-        ", call: " + json.dumps(labels["call"]) + ", zalo: " + json.dumps(labels["zalo"]) + " };\n"
-        "    </script>"
-    )
     # Tag ID/label do editor nhập tự do qua CMS - nếu ai đó vô tình gõ "</script>" vào 1 ô,
     # phải phá literal đó để trình duyệt không đóng thẻ <script> sớm (cùng lỗ hổng XSS đã
-    # vá cho JSON-LD ở json_ld(), xem hàm đó để biết chi tiết).
-    new_block = new_block.replace("</script", "<\\/script")
+    # vá cho JSON-LD ở json_ld(), xem hàm đó để biết chi tiết). CHỈ escape phần GIÁ TRỊ do
+    # editor nhập - nếu escape cả new_block thì thẻ </script> đóng khối cũng bị phá theo,
+    # khiến khối script không bao giờ đóng và toàn bộ JS quảng cáo phía sau chết.
+    def js_str(value):
+        return json.dumps(value).replace("</script", "<\\/script")
+
+    new_block = (
+        "<script>\n"
+        "      window.GOOGLE_ADS_TAG_ID = " + js_str(tag_id) + ";\n"
+        "      window.GOOGLE_ADS_LABELS = { booking: " + js_str(labels["booking"]) +
+        ", call: " + js_str(labels["call"]) + ", zalo: " + js_str(labels["zalo"]) + " };\n"
+        "    </script>"
+    )
 
     replacement = "<!-- GOOGLE_ADS_CONFIG_START -->\n    " + new_block + "\n    <!-- GOOGLE_ADS_CONFIG_END -->"
 
