@@ -15,27 +15,15 @@
 
   var labels = window.GOOGLE_ADS_LABELS || {};
 
-  /** Gửi 1 sự kiện conversion. redirectUrl (nếu có, vd "tel:08...") sẽ được điều hướng tới
-     NGAY SAU KHI gtag xác nhận đã gửi xong (hoặc timeout 2s nếu mạng chậm/bị chặn) — theo
-     đúng pattern Google Ads khuyến nghị cho click-to-call, tránh mất conversion vì trình
-     duyệt rời trang (gọi điện) trước khi request kịp gửi đi. */
-  function sendConversion(sendTo, redirectUrl) {
-    if (!sendTo || typeof gtag !== 'function') {
-      if (redirectUrl) window.location = redirectUrl;
-      return;
-    }
-    var navigated = false;
-    var go = function () {
-      if (navigated) return;
-      navigated = true;
-      if (redirectUrl) window.location = redirectUrl;
-    };
-    gtag('event', 'conversion', {
-      send_to: sendTo,
-      event_callback: go,
-      event_timeout: 2000,
-    });
-    if (redirectUrl) setTimeout(go, 2000);
+  /** Gửi 1 sự kiện conversion. KHÔNG preventDefault/điều hướng lại bằng JS cho tel:/zalo.me —
+     trình duyệt (Chrome/Safari) chặn thẳng tay các lượt "tự động gọi điện" khi việc điều
+     hướng tel: xảy ra ngoài lượt click gốc (vd trong setTimeout hoặc event_callback của
+     gtag), vì lúc đó không còn được tính là user-gesture nữa. Nên: cứ để thẻ
+     <a href="tel:...">/"https://zalo.me/..."> tự điều hướng ngay trong lượt
+     click gốc như bình thường, chỉ bắn ping conversion song song, không chờ, không chặn. */
+  function sendConversion(sendTo) {
+    if (!sendTo || typeof gtag !== 'function') return;
+    gtag('event', 'conversion', { send_to: sendTo });
   }
 
   // Gửi form đặt xe thành công - main.js tự phát sự kiện này sau khi server xác nhận đã lưu
@@ -51,8 +39,7 @@
     var link = telLink || zaloLink;
     if (!link) return;
     var label = telLink ? labels.call : labels.zalo;
-    if (!label) return; // chưa cấu hình label này - giữ hành vi mặc định (gọi/mở Zalo ngay)
-    e.preventDefault();
-    sendConversion(label, link.href);
+    if (!label) return; // chưa cấu hình label này - không track gì thêm
+    sendConversion(label);
   });
 })();
