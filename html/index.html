@@ -364,7 +364,7 @@
             VẬN TẢI VÀ DU LỊCH TIẾN ĐỨC
           </p>
 
-          <a class="hotline" href="tel:0862933233">
+          <a id="cta-call-header" class="hotline" href="tel:0862933233">
             <svg class="ic hotline__ic"><use href="#i-phone" /></svg>
             <span class="hotline__text">
               <span class="hotline__label">HOTLINE (24/7) - ZALO</span>
@@ -388,7 +388,11 @@
           <ul class="navlist" id="navlist">
             <li><a class="is-active" href="#top">TRANG CHỦ</a></li>
             <li><a href="#gioi-thieu">GIỚI THIỆU</a></li>
-            <li><a href="#dich-vu">DỊCH VỤ</a></li>
+            <li class="has-submenu"><a aria-haspopup="true" aria-expanded="false" href="#dich-vu">DỊCH VỤ</a>
+          <ul class="submenu">
+            <li><a href="dich-vu/san-bay-cat-bi-ha-long/">Xe sân bay Cát Bi - Hạ Long</a></li>
+          </ul>
+        </li>
             <li><a href="#doi-xe">ĐỘI XE</a></li>
             <li><a href="#tuyen-xe">TUYẾN XE</a></li>
             <li><a href="#bang-gia">BẢNG GIÁ</a></li>
@@ -404,14 +408,22 @@
       <!-- ============ HERO ============ -->
       <section class="hero">
         <div class="hero__media">
-          <img
-            class="hero__bg"
-            src="images/hero-banner.jpg"
-            alt="Xe VinFast VF5 và Limo Green của Tiến Đức trên cung đường ven vịnh Hạ Long"
-            width="2033"
-            height="773"
-            fetchpriority="high"
-          />
+          <picture>
+            <source
+              media="(max-width: 700px)"
+              srcset="images/hero-banner-mobile.webp"
+              type="image/webp"
+            />
+            <source srcset="images/hero-banner.webp" type="image/webp" />
+            <img
+              class="hero__bg"
+              src="images/hero-banner.jpg"
+              alt="Xe VinFast VF5 và Limo Green của Tiến Đức trên cung đường ven vịnh Hạ Long"
+              width="2033"
+              height="773"
+              fetchpriority="high"
+            />
+          </picture>
           <img
             class="hero__logo"
             src="images/logo.png"
@@ -448,13 +460,13 @@
           </ul>
 
           <div class="hero__cta">
-            <a class="hero__phone" href="tel:0862933233">
+            <a id="cta-call-hero-mobile" class="hero__phone" href="tel:0862933233">
               <span class="hero__phone-ic"
                 ><svg class="ic"><use href="#i-phone" /></svg
               ></span>
               0862 933 233
             </a>
-            <a class="hotline hero__hotline" href="tel:0862933233">
+            <a id="cta-call-hero-desktop" class="hotline hero__hotline" href="tel:0862933233">
               <svg class="ic hotline__ic"><use href="#i-phone" /></svg>
               <span class="hotline__text">
                 <span class="hotline__label">HOTLINE (24/7) - ZALO</span>
@@ -771,7 +783,7 @@
                 </div>
               </div>
 
-              <button class="btn btn--gold btn--block" type="submit">
+              <button id="booking-submit" class="btn btn--gold btn--block" type="submit">
                 GỬI YÊU CẦU ĐẶT XE <svg class="ic"><use href="#i-send" /></svg>
               </button>
               <p class="booking__msg" id="booking-msg" role="status"></p>
@@ -996,12 +1008,13 @@
             <li>
               <span class="dot"
                 ><svg class="ic"><use href="#i-phone" /></svg></span
-              ><a href="tel:0862933233">0862 933 233</a>
+              ><a id="cta-call-footer" href="tel:0862933233">0862 933 233</a>
             </li>
             <li>
               <span class="dot"
                 ><svg class="ic"><use href="#i-chat" /></svg></span
               ><a
+                id="cta-zalo-footer"
                 href="https://zalo.me/0862933233"
                 target="_blank"
                 rel="noopener"
@@ -1056,6 +1069,7 @@
               ><svg class="ic"><use href="#i-fb" /></svg
             ></a>
             <a
+              id="cta-zalo-social"
               class="social social--zalo"
               href="https://zalo.me/0862933233"
               target="_blank"
@@ -1067,7 +1081,7 @@
               ><svg class="ic"><use href="#i-tiktok" /></svg
             ></a>
           </div>
-          <a class="hotline hotline--foot" href="tel:0862933233">
+          <a id="cta-call-footer-hotline" class="hotline hotline--foot" href="tel:0862933233">
             <svg class="ic hotline__ic"><use href="#i-phone" /></svg>
             <span class="hotline__text">
               <span class="hotline__label">HOTLINE (24/7) - ZALO</span>
@@ -1083,6 +1097,7 @@
     </footer>
 
     <a
+      id="cta-zalo-float"
       class="callnow callnow--zalo"
       href="https://zalo.me/0862933233"
       target="_blank"
@@ -1091,9 +1106,40 @@
     >
       <span class="callnow__label">Zalo</span>
     </a>
-    <a class="callnow" href="tel:0862933233" aria-label="Gọi ngay 0862 933 233">
+    <a id="cta-call-float" class="callnow" href="tel:0862933233" aria-label="Gọi ngay 0862 933 233">
       <svg class="ic"><use href="#i-phone" /></svg>
     </a>
+
+    <nav class="mobile-actionbar" aria-label="Liên hệ nhanh">
+      <a
+        id="cta-zalo-mobilebar"
+        class="mobile-actionbar__item mobile-actionbar__item--zalo"
+        href="https://zalo.me/0862933233"
+        target="_blank"
+        rel="noopener"
+        aria-label="Chat Zalo 0862 933 233"
+      >
+        <img class="ic" src="images/zalo-icon.webp" alt="" width="20" height="20" />
+        <span>Liên hệ Zalo</span>
+      </a>
+      <a
+        id="cta-call-mobilebar"
+        class="mobile-actionbar__item mobile-actionbar__item--phone"
+        href="tel:0862933233"
+        aria-label="Gọi ngay 0862 933 233"
+      >
+        <svg class="ic"><use href="#i-phone" /></svg>
+        <span>Gọi xe ngay</span>
+      </a>
+      <a
+        class="mobile-actionbar__item mobile-actionbar__item--book"
+        href="#dat-xe"
+        aria-label="Đặt xe"
+      >
+        <svg class="ic"><use href="#i-car" /></svg>
+        <span>Đặt xe</span>
+      </a>
+    </nav>
 
     <script src="js/main.js"></script>
     <script src="js/place-autocomplete.js"></script>

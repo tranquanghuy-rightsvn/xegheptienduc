@@ -21,6 +21,16 @@
     </image:image>
   </url>
   <url>
+    <loc>https://tienductransport.vn/dich-vu/san-bay-cat-bi-ha-long/</loc>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://tienductransport.vn/images/san-bay-cat-bi-og.jpg</image:loc>
+      <image:title>Xe Sân Bay Cát Bi - Hạ Long | Tiến Đức</image:title>
+    </image:image>
+  </url>
+  <url>
     <loc>https://tienductransport.vn/tin-tuc/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>weekly</changefreq>

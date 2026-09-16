@@ -20,6 +20,18 @@
     });
 
     navlist.addEventListener('click', function (e) {
+      /* Mobile (≤900px): mục có submenu (vd DỊCH VỤ) bấm để xổ ra thay vì điều
+         hướng ngay — desktop vẫn dùng hover nên bỏ qua nhánh này. */
+      var submenuLink = e.target.closest('.has-submenu > a');
+      if (submenuLink && window.matchMedia('(max-width:900px)').matches) {
+        e.preventDefault();
+        e.stopPropagation(); // chặn handler cuộn mượt ở mục 3 (cùng khớp a[href^="#"])
+        var li = submenuLink.parentElement;
+        var open = li.classList.toggle('is-open');
+        submenuLink.setAttribute('aria-expanded', open ? 'true' : 'false');
+        return;
+      }
+
       if (e.target.closest('a')) {
         navlist.classList.remove('is-open');
         toggle.setAttribute('aria-expanded', 'false');
@@ -45,16 +57,25 @@
     if (current) current.link.classList.add('is-active');
   }
 
-  var ticking = false;
-  window.addEventListener('scroll', function () {
-    if (ticking) return;
-    ticking = true;
-    window.requestAnimationFrame(function () {
-      markActive();
-      ticking = false;
-    });
-  }, { passive: true });
-  markActive();
+  /* Scroll-spy chỉ chạy trên chính trang chủ (nav single-page thật sự). Các
+     trang con (dịch vụ, liên hệ...) tự cố định is-active riêng cho mục của
+     mình trong HTML — kể cả khi trang con đó có vài anchor cục bộ (vd trang
+     dịch vụ sân bay có #bang-gia, #doi-xe, #dat-xe), scroll-spy vẫn không
+     được đụng vào vì sẽ đè mất is-active tĩnh của "DỊCH VỤ" một cách lộn xộn. */
+  var path = location.pathname.replace(/index\.html$/, '');
+  var isHomepage = path === '/' || path === '';
+  if (isHomepage && targets.length > 1) {
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(function () {
+        markActive();
+        ticking = false;
+      });
+    }, { passive: true });
+    markActive();
+  }
 
   /* ---------- 3. Cuộn mượt tới section ---------- */
   document.addEventListener('click', function (e) {

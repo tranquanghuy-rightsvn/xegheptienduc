@@ -120,6 +120,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1z"/></symbol>
   <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7m0 9.5A2.5 2.5 0 1 1 14.5 9 2.5 2.5 0 0 1 12 11.5"/></symbol>
   <symbol id="i-chat" viewBox="0 0 24 24"><path d="M12 3C6.9 3 2.8 6.4 2.8 10.6c0 2.4 1.4 4.6 3.5 6L5.4 20l3.9-2a11 11 0 0 0 2.7.3c5.1 0 9.2-3.4 9.2-7.7S17.1 3 12 3"/></symbol>
+  <symbol id="i-car" viewBox="0 0 24 24"><path d="M18.9 6a1.5 1.5 0 0 0-1.4-1H6.5A1.5 1.5 0 0 0 5.1 6L3 12v8a1 1 0 0 0 1 1h1.5a1 1 0 0 0 1-1v-1h11v1a1 1 0 0 0 1 1H20a1 1 0 0 0 1-1v-8zM6.8 7h10.4l1.4 4H5.4zM6.5 16.5A1.5 1.5 0 1 1 8 15a1.5 1.5 0 0 1-1.5 1.5m11 0A1.5 1.5 0 1 1 19 15a1.5 1.5 0 0 1-1.5 1.5"/></symbol>
   <symbol id="i-mail" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2m0 4-8 5-8-5V6l8 5 8-5z"/></symbol>
   <symbol id="i-fb" viewBox="0 0 24 24"><path d="M14 8h2.5V5H14c-2.2 0-4 1.8-4 4v2H8v3h2v7h3v-7h2.5l.5-3H13V9c0-.6.4-1 1-1"/></symbol>
   <symbol id="i-tiktok" viewBox="0 0 24 24"><path d="M17 3h-3v12a2.6 2.6 0 1 1-2.6-2.6c.2 0 .4 0 .6.1V9.4a5.6 5.6 0 1 0 5 5.6V9.1A6.4 6.4 0 0 0 21 10.3V7.2A3.9 3.9 0 0 1 17 3"/></symbol>
@@ -164,7 +165,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <ul class="navlist" id="navlist">
         <li><a href="../index.html#top">TRANG CHỦ</a></li>
         <li><a href="../index.html#gioi-thieu">GIỚI THIỆU</a></li>
-        <li><a href="../index.html#dich-vu">DỊCH VỤ</a></li>
+        <li class="has-submenu"><a aria-haspopup="true" aria-expanded="false" href="../index.html#dich-vu">DỊCH VỤ</a>
+          <ul class="submenu">
+            <li><a href="../dich-vu/san-bay-cat-bi-ha-long/">Xe sân bay Cát Bi - Hạ Long</a></li>
+          </ul>
+        </li>
         <li><a href="../index.html#doi-xe">ĐỘI XE</a></li>
         <li><a href="../index.html#tuyen-xe">TUYẾN XE</a></li>
         <li><a href="../index.html#bang-gia">BẢNG GIÁ</a></li>
@@ -326,6 +331,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <a class="callnow" href="tel:0862933233" aria-label="Gọi ngay 0862 933 233">
   <svg class="ic"><use href="#i-phone"/></svg>
 </a>
+
+<nav class="mobile-actionbar" aria-label="Liên hệ nhanh">
+  <a class="mobile-actionbar__item mobile-actionbar__item--zalo" href="https://zalo.me/0862933233" target="_blank" rel="noopener" aria-label="Chat Zalo 0862 933 233">
+    <img class="ic" src="../images/zalo-icon.webp" alt="" width="20" height="20" />
+    <span>Liên hệ Zalo</span>
+  </a>
+  <a class="mobile-actionbar__item mobile-actionbar__item--phone" href="tel:0862933233" aria-label="Gọi ngay 0862 933 233">
+    <svg class="ic"><use href="#i-phone"/></svg>
+    <span>Gọi xe ngay</span>
+  </a>
+  <a class="mobile-actionbar__item mobile-actionbar__item--book" href="../index.html#dat-xe" aria-label="Đặt xe">
+    <svg class="ic"><use href="#i-car"/></svg>
+    <span>Đặt xe</span>
+  </a>
+</nav>
 
 <script src="../js/main.js"></script>
 </body>
