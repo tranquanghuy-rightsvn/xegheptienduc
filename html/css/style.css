@@ -282,6 +282,7 @@ button,input{font:inherit;color:inherit}
   border-bottom:2px solid var(--gold);
 }
 .mainnav__inner{display:flex;align-items:center}
+.mainnav__bar{display:none}
 .navlist{display:flex;align-items:center;gap:14px;flex-wrap:wrap;width:100%;justify-content:center}
 .navlist a{
   display:block;padding:12px 14px;
@@ -1029,7 +1030,11 @@ textarea.field__input{resize:vertical;min-height:78px;line-height:1.45;padding-t
   .topbar .hotline{display:none}
   .mainnav{position:relative}
   .mainnav__inner{flex-direction:column;align-items:stretch}
+  .mainnav__bar{display:flex;align-items:center;justify-content:space-between;width:100%}
   .nav-toggle{display:flex;align-self:flex-start}
+  .hotline--nav{padding:6px 14px;gap:8px}
+  .hotline--nav .hotline__ic{font-size:20px}
+  .hotline--nav .hotline__num{font-size:16px}
   .navlist{
     position:absolute;top:100%;left:0;right:0;z-index:40;
     background:linear-gradient(180deg,#053e20 0%,#02341a 100%);
@@ -1149,6 +1154,9 @@ textarea.field__input{resize:vertical;min-height:78px;line-height:1.45;padding-t
   .hero__hotline .hotline__num{font-size:20px}
   .brand__name{font-size:21px}
   .topbar__title{font-size:13px}
+  .hotline--nav{padding:5px 10px;gap:6px}
+  .hotline--nav .hotline__ic{font-size:18px}
+  .hotline--nav .hotline__num{font-size:14px}
 }
 
 @media (prefers-reduced-motion:reduce){

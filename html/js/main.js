@@ -189,6 +189,10 @@
               // chuyển đổi thật (không phải bot, không phải demo mode) - main.js cố tình
               // không biết gì về Google Ads, chỉ phát 1 sự kiện DOM chung.
               document.dispatchEvent(new CustomEvent('tienduc:conversion', { detail: { type: apiAction } }));
+              // Đồng thời đẩy vào dataLayer để Google Tag Manager đọc được trực tiếp (GTM
+              // Custom Event trigger chỉ nghe dataLayer.push, không nghe DOM CustomEvent ở trên).
+              window.dataLayer = window.dataLayer || [];
+              window.dataLayer.push({ event: 'tienduc_conversion', tienduc_type: apiAction });
             } else {
               msg.classList.add('is-error');
               msg.textContent = 'Có lỗi xảy ra, Quý khách vui lòng gọi trực tiếp hotline 0862 933 233 giúp em nhé.';
