@@ -97,6 +97,31 @@
      skill free-cms-static-site-pipeline, gas-backend-patterns.md mục 6). */
   var forms = Array.prototype.slice.call(document.querySelectorAll('form[novalidate]'));
 
+  /* Số điện thoại Việt Nam — dùng chung cho cả form đặt xe lẫn form liên hệ.
+     Luật CÙNG NỘI DUNG được cài lại ở phía server (normalizePhoneVn_ trong gas/Code.js):
+     JS ở đây chỉ để báo lỗi ngay cho người dùng, ai tắt JS hoặc gọi thẳng doPost vẫn phải
+     qua cửa server. Sửa luật thì SỬA CẢ HAI CHỖ.
+
+     Chấp nhận (sau khi bỏ hết dấu cách/chấm/gạch/ngoặc):
+       - Di động: 10 số, 0 + đầu số 3/5/7/8/9  -> 0964074043, 0862933233
+       - Cố định: 11 số, bắt đầu 02 + mã vùng  -> 02033 xxx xxx (Quảng Ninh), 024 xxxx xxxx
+       - Dạng quốc tế +84 / 0084 / 84 (11 số) được quy về dạng 0 rồi mới xét.
+     "84..." chỉ coi là quốc tế khi dài đúng 11 số: số trong nước LUÔN bắt đầu bằng 0, nên
+     không sợ nhầm với đầu số 084 (Vinaphone) — 0842074043 vẫn là di động hợp lệ. */
+  function normalizePhoneVn(raw) {
+    var v = String(raw || '').trim();
+    var plus = v.charAt(0) === '+';
+    var d = v.replace(/\D/g, '');
+    if (plus && d.indexOf('84') === 0) return '0' + d.slice(2);
+    if (d.indexOf('0084') === 0) return '0' + d.slice(4);
+    if (d.indexOf('84') === 0 && d.length === 11) return '0' + d.slice(2);
+    return d;
+  }
+
+  function isValidPhoneVn(raw) {
+    return /^(0[35789]\d{8}|02\d{9})$/.test(normalizePhoneVn(raw));
+  }
+
   function withLoading(button, run) {
     if (!button) return run();
     var originalText = button.innerHTML;
@@ -125,7 +150,7 @@
         var value = f.value.trim();
         var bad = f.required && !value;
         if (value && f.type === 'tel') {
-          bad = bad || !/^[0-9+\s.\-()]{9,15}$/.test(value);
+          bad = bad || !isValidPhoneVn(value);
         }
         if (value && f.type === 'email') {
           bad = bad || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
@@ -135,9 +160,16 @@
       });
 
       if (invalid) {
-        msg.textContent = (invalid.type === 'tel' || invalid.type === 'email') && invalid.value.trim()
-          ? 'Thông tin chưa đúng định dạng, Quý khách kiểm tra lại giúp em nhé.'
-          : 'Quý khách vui lòng điền đầy đủ thông tin giúp em nhé.';
+        var invalidFilled = invalid.value.trim();
+        if (invalid.type === 'tel' && invalidFilled) {
+          /* Nói rõ SAI Ở ĐÂU - "chưa đúng định dạng" chung chung khiến khách gõ đi gõ lại
+             cùng 1 số mà không biết thiếu gì. */
+          msg.textContent = 'Số điện thoại chưa đúng, Quý khách nhập giúp em số Việt Nam 10 số (ví dụ 0964074043) nhé.';
+        } else if (invalid.type === 'email' && invalidFilled) {
+          msg.textContent = 'Email chưa đúng định dạng, Quý khách kiểm tra lại giúp em nhé.';
+        } else {
+          msg.textContent = 'Quý khách vui lòng điền đầy đủ thông tin giúp em nhé.';
+        }
         msg.classList.add('is-error');
         invalid.focus();
         return;
@@ -172,7 +204,11 @@
 
       var payload = { formType: apiAction, _hp: '' };
       fields.forEach(function (f) {
-        if (f.name) payload[f.name] = f.value.trim();
+        if (!f.name) return;
+        /* Gửi số điện thoại ở dạng đã chuẩn hoá (0xxxxxxxxx) để Sheet, email thông báo và
+           link tel: trong email đều đồng nhất, không lẫn "+84 96 407 40 43" với "0964074043"
+           - server cũng tự chuẩn hoá lại lần nữa, đây chỉ là cho gọn. */
+        payload[f.name] = f.type === 'tel' ? normalizePhoneVn(f.value) : f.value.trim();
       });
 
       withLoading(submitBtn, function () {
@@ -195,7 +231,12 @@
               window.dataLayer.push({ event: 'tienduc_conversion', tienduc_type: apiAction });
             } else {
               msg.classList.add('is-error');
-              msg.textContent = 'Có lỗi xảy ra, Quý khách vui lòng gọi trực tiếp hotline 0862 933 233 giúp em nhé.';
+              /* Ưu tiên câu server trả về (vd "Số điện thoại không hợp lệ...", "Quý khách vui
+                 lòng đợi ít giây...") - những câu đó nói đúng chỗ sai và đều đã được viết cho
+                 khách đọc; chỉ rơi về câu chung khi server không nói gì. */
+              msg.textContent = (json && json.error)
+                ? json.error + ' Nếu cần gấp, Quý khách gọi hotline 0862 933 233 giúp em nhé.'
+                : 'Có lỗi xảy ra, Quý khách vui lòng gọi trực tiếp hotline 0862 933 233 giúp em nhé.';
             }
           })
           .catch(function () {

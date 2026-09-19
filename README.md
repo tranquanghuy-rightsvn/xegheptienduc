@@ -10,6 +10,9 @@ html/               site tĩnh thật (deploy trực tiếp thư mục này)
   index.html         trang chủ
   lien-he/           trang liên hệ (có form gửi CMS)
   tin-tuc/           trang tin tức — index.html + <slug>.html do scripts/build.py sinh ra
+  admin/             trang quản trị — NHÚNG CMS bằng iframe vào chính domain này
+  admin-gas/         đường lui — chuyển hướng thẳng ra Apps Script khi không nhúng được
+  vendor/tinymce/    TinyMCE 6.8.5 TỰ HOST cho CMS (xem mục "Trang quản trị" bên dưới)
 data/                nguồn dữ liệu tin tức — CMS ghi khi Lưu/Xoá qua GitHub Contents API
   posts.json          index nhẹ mọi bài
   tin-tuc/<slug>.json nội dung đầy đủ 1 bài
@@ -29,6 +32,25 @@ gas/                 CMS backend (KHÔNG track git — xem gas/README.md để d
 | `html/index.html` — vùng `GOOGLE_ADS_CONFIG_START...END` | trình duyệt khách | **Không** — `build.py` vá lại vùng này mỗi lần chạy |
 | `html/index.html` — phần còn lại, `html/lien-he/index.html` | trình duyệt khách | **Có** — không qua build script |
 | `templates/*.html` | `build.py` đọc để render | **Có** — đây là chỗ sửa design trang tin tức |
+| `html/admin/index.html`, `html/admin-gas/index.html` | người quản trị | **Có** — file tĩnh, `build.py` cố ý không đụng |
+| `html/vendor/tinymce/**` | CMS (Apps Script) tải về | **Không** — bản phát hành nguyên khối, nâng cấp thì thay cả thư mục |
+
+## Trang quản trị
+
+- `tienductransport.vn/admin/` — **NHÚNG** CMS bằng iframe vào chính domain, nên thanh địa
+  chỉ luôn là tienductransport.vn và thanh cảnh báo của Google (cao 25px) bị cắt bằng CSS.
+- `tienductransport.vn/admin-gas/` — **đường lui**, chuyển hướng thẳng ra Apps Script. Bản
+  nhúng tự chỉ sang đây nếu 12 giây không tải được. Luôn phải giữ: trình duyệt đang đăng
+  nhập tài khoản Google Workspace của tổ chức bị Google chuyển sang
+  `script.google.com/a/macros/<domain>/...` rồi treo vĩnh viễn khi bị nhúng.
+- URL `/exec` của Apps Script nằm ở **đúng 3 chỗ**: 2 file trên + `html/js/main.js`
+  (`GAS_EXEC_URL`). Deploy CMS ra URL mới thì sửa cả 3.
+- **TinyMCE tự host** tại `/vendor/tinymce/` (bản 6.8.5), KHÔNG dùng CDN — khi CMS chạy
+  trong iframe lồng khác origin, trình soạn thảo gọi tài nguyên từ miền lạ là nhóm nguyên
+  nhân hay chết im lặng nhất. Bản nhúng và TinyMCE offline đi kèm nhau, không tách rời.
+- ⚠️ **Thứ tự triển khai bắt buộc**: deploy site (để `/vendor/tinymce/` sống thật) **trước**,
+  rồi mới push CMS lên Apps Script. Làm ngược là CMS trỏ vào đường dẫn chưa tồn tại → mất
+  trình soạn thảo.
 
 ## Vận hành hằng ngày
 
