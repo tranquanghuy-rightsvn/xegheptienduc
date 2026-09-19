@@ -7,7 +7,7 @@
   /* Dán URL /exec của Web App Google Apps Script vào đây sau khi deploy CMS (xem
      gas/README.md). Rỗng = form vẫn validate/hiện thông báo cục bộ như trước nhưng
      KHÔNG gửi đi đâu — chỉ để tránh vỡ trang khi chưa deploy xong CMS. */
-  var GAS_EXEC_URL = '';
+  var GAS_EXEC_URL = 'https://script.google.com/macros/s/AKfycbwuJx-20EuTcb_U1FhfFZgBxvn_fHmfCw0fjJ9oLlqC2lPNHM84uoJIGApgF5gvxKXp/exec';
 
   /* ---------- 1. Mobile menu ---------- */
   var toggle = document.querySelector('.nav-toggle');
