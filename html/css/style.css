@@ -1113,6 +1113,7 @@ textarea.field__input{resize:vertical;min-height:78px;line-height:1.45;padding-t
   .promo-hero__inner{padding:36px var(--pad) 18px}
   .promo-hero__badge{margin-bottom:10px}
   .promo-hero__title{font-size:min(22px,6vw);margin-bottom:10px}
+  .promo-hero__route--break{display:block}
   .promo-hero__checks{gap:6px 14px}
   .promo-hero__checks li{font-size:13px}
   .promo-hero__checks .ic{font-size:15px}
