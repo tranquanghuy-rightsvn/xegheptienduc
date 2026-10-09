@@ -714,6 +714,24 @@ button,input{font:inherit;color:inherit}
   color:#0d2f19;box-shadow:0 2px 6px rgba(0,0,0,.2);
 }
 .price-card--pro .price-card__title{margin-top:6px}
+.price-card--auto{height:auto;min-height:172px}
+
+.price-coverage-note{
+  margin-top:28px;padding:16px 20px;text-align:center;
+  background:var(--card);border:1px solid var(--line);border-left:4px solid var(--gold);
+  border-radius:var(--r-card);box-shadow:var(--shadow);
+  font-size:13.5px;line-height:1.55;color:var(--muted);font-weight:500;
+}
+.price-coverage-note strong{color:var(--ink);font-weight:700}
+.price-coverage-note p+p{margin-top:12px}
+.price-coverage-note__cta{
+  display:inline-flex;align-items:center;gap:8px;padding:9px 20px;border-radius:999px;
+  background:linear-gradient(180deg,#0b4f28,#012c15);border:1px solid var(--gold);
+  font-family:var(--ff-head);font-weight:700;font-size:13.5px;color:var(--gold-l);
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+.price-coverage-note__cta:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,43,23,.25)}
+.price-coverage-note__cta .ic{font-size:16px}
 
 .notice{
   margin-top:28px;padding:14px 20px 16px;
