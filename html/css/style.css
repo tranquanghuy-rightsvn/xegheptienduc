@@ -808,8 +808,20 @@ select.field__input{
   font-family:var(--ff-head);font-weight:700;font-size:10.5px;letter-spacing:.8px;
   color:#0d2f19;box-shadow:0 2px 6px rgba(0,0,0,.2);
 }
-.price-card--pro .price-card__title{margin-top:6px}
+.price-card--pro .price-card__flag + .price-card__title{margin-top:6px}
 .price-card--auto{height:auto;min-height:172px}
+/* Thẻ có nút gọi trên landing (bảng giá, điểm đón): nút luôn nằm đáy thẻ dù mô tả dài ngắn khác nhau */
+.price-card--cta{padding-bottom:18px}
+.price-card--cta .price-card__desc{margin-bottom:14px}
+.price-card--other{border-style:dashed;border-color:var(--gold)}
+.pickup-cta{
+  display:inline-flex;align-items:center;gap:7px;margin-top:auto;padding:9px 20px;border-radius:999px;
+  background:linear-gradient(180deg,#f7d78f 0%,#e3b155 48%,#c48c1e 100%);
+  font-family:var(--ff-head);font-weight:700;font-size:13.5px;color:#0d2f19;
+  box-shadow:0 3px 10px rgba(0,0,0,.18);transition:transform .2s ease,box-shadow .2s ease;
+}
+.pickup-cta:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,43,23,.25)}
+.pickup-cta .ic{font-size:15px}
 
 .price-coverage-note{
   margin-top:28px;padding:16px 20px;text-align:center;

@@ -118,7 +118,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <ul class="navlist" id="navlist">
         <li><a href="#top">TRANG CHỦ</a></li>
         <li><a href="#bang-gia">BẢNG GIÁ</a></li>
-        <li><a href="#khu-vuc-phuc-vu">ĐIỂM ĐÓN - TRẢ</a></li>
+        <li><a href="#khu-vuc-phuc-vu">ĐIỂM ĐÓN</a></li>
         <li><a href="#doi-xe">ĐỘI XE</a></li>
         <li><a href="#uy-tin">VỀ NHÀ XE</a></li>
         <li><a href="#faq">HỎI ĐÁP</a></li>
@@ -241,29 +241,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p class="price-sub">Hạ Long → Hải Phòng — giá 1 chiều</p>
 
     <ul class="price-grid price-grid--4">
-      <li class="price-card price-card--pro">
+      <li class="price-card price-card--pro price-card--auto price-card--cta">
         <span class="badge"><svg class="ic"><use href="#i-ticket"/></svg></span>
-        <span class="price-card__flag">TIẾT KIỆM</span>
         <h3 class="price-card__title">VÉ GHÉP</h3>
         <p class="price-card__amount">250.000<span>đ</span></p>
         <p class="price-card__desc">Ghép chung xe, đón tận nhà - trả tận nơi</p>
+        <a id="cta-call-price-ve-ghep" class="pickup-cta" href="tel:0862933233"><svg class="ic"><use href="#i-phone"/></svg>Đặt vé ghép</a>
       </li>
-      <li class="price-card">
+      <li class="price-card price-card--auto price-card--cta">
         <span class="badge"><svg class="ic"><use href="#i-car"/></svg></span>
         <h3 class="price-card__title">BAO XE 5 CHỖ</h3>
         <p class="price-card__amount">400.000<span>đ</span></p>
         <p class="price-card__desc">Xe riêng không ghép khách, chủ động giờ đi</p>
+        <a id="cta-call-price-bao-xe-5" class="pickup-cta" href="tel:0862933233"><svg class="ic"><use href="#i-phone"/></svg>Đặt xe 5 chỗ</a>
       </li>
-      <li class="price-card">
+      <li class="price-card price-card--auto price-card--cta">
         <span class="badge"><svg class="ic"><use href="#i-users"/></svg></span>
         <h3 class="price-card__title">BAO XE 7 CHỖ</h3>
         <p class="price-card__amount">500.000<span>đ</span></p>
         <p class="price-card__desc">Xe riêng rộng rãi cho gia đình, nhóm bạn</p>
+        <a id="cta-call-price-bao-xe-7" class="pickup-cta" href="tel:0862933233"><svg class="ic"><use href="#i-phone"/></svg>Đặt xe 7 chỗ</a>
       </li>
-      <li class="price-card">
+      <li class="price-card price-card--auto price-card--cta">
         <span class="badge"><svg class="ic"><use href="#i-tie"/></svg></span>
         <h3 class="price-card__title">HỢP ĐỒNG - TOUR</h3>
         <p class="price-card__desc">Đưa đón khách, tour du lịch, vận chuyển theo yêu cầu</p>
+        <a id="cta-call-price-hop-dong" class="pickup-cta" href="tel:0862933233"><svg class="ic"><use href="#i-phone"/></svg>Gọi báo giá</a>
       </li>
     </ul>
 
@@ -279,49 +282,41 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<!-- ============ ĐIỂM ĐÓN - TRẢ ============ -->
+<!-- ============ ĐIỂM ĐÓN ============
+     Mỗi điểm đón phổ biến 1 thẻ để khách nhận ra ngay điểm của mình; nút "Đặt xe nhanh" đều gọi
+     về 1 tổng đài, id riêng (cta-call-pickup-*) để GTM biết khách bấm ở điểm nào. -->
 <section class="section" id="khu-vuc-phuc-vu">
   <div class="container">
-    <h2 class="sec-title">ĐIỂM ĐÓN - TRẢ TRÊN TUYẾN</h2>
+    <h2 class="sec-title">ĐIỂM ĐÓN TẠI HẠ LONG</h2>
     <span class="ornament" aria-hidden="true"></span>
-    <p class="price-sub">Đón tận nơi tại Hạ Long – trả tận nơi tại Hải Phòng</p>
+    <p class="price-sub">Chọn điểm gần bạn – xe đón tận nơi, trả tận nơi tại Hải Phòng</p>
 
     <ul class="price-grid price-grid--4">
-      <li class="price-card price-card--auto">
+      <li class="price-card price-card--auto price-card--cta">
         <span class="badge"><svg class="ic"><use href="#i-pin"/></svg></span>
-        <h3 class="price-card__title">BÃI CHÁY - TUẦN CHÂU</h3>
-        <p class="price-card__desc">Đón trả tại khách sạn, nhà riêng, bến du thuyền, khu du lịch và các điểm hẹn trong khu vực Bãi Cháy, Tuần Châu.</p>
+        <h3 class="price-card__title">BÃI CHÁY</h3>
+        <p class="price-card__desc">Đón tại khách sạn, homestay, Sun World, chợ đêm và các điểm hẹn khu Bãi Cháy.</p>
+        <a id="cta-call-pickup-bai-chay" class="pickup-cta" href="tel:0862933233"><svg class="ic"><use href="#i-phone"/></svg>Đặt xe nhanh</a>
       </li>
-
-      <li class="price-card price-card--auto">
+      <li class="price-card price-card--auto price-card--cta">
         <span class="badge"><svg class="ic"><use href="#i-pin"/></svg></span>
-        <h3 class="price-card__title">HÒN GAI - CÁC KHU VỰC HẠ LONG</h3>
-        <p class="price-card__desc">Đón trả tận nơi tại Hòn Gai, Hà Tu, Cao Xanh và các khu vực khác thuộc Hạ Long theo điểm hẹn.</p>
+        <h3 class="price-card__title">TUẦN CHÂU</h3>
+        <p class="price-card__desc">Đón tại cảng tàu, bến du thuyền, khu du lịch Tuần Châu sau khi Quý khách đi vịnh về.</p>
+        <a id="cta-call-pickup-tuan-chau" class="pickup-cta" href="tel:0862933233"><svg class="ic"><use href="#i-phone"/></svg>Đặt xe nhanh</a>
       </li>
-
-      <li class="price-card price-card--auto">
+      <li class="price-card price-card--auto price-card--cta">
         <span class="badge"><svg class="ic"><use href="#i-pin"/></svg></span>
-        <h3 class="price-card__title">TRUNG TÂM HẢI PHÒNG</h3>
-        <p class="price-card__desc">Đón trả tại nhà riêng, khách sạn, cơ quan ở các khu vực nội thành Hải Phòng và những điểm hẹn lân cận.</p>
+        <h3 class="price-card__title">HÒN GAI - TRUNG TÂM HẠ LONG</h3>
+        <p class="price-card__desc">Đón tận nhà, cơ quan tại Hòn Gai, Hà Tu, Cao Xanh và các phường trung tâm.</p>
+        <a id="cta-call-pickup-hon-gai" class="pickup-cta" href="tel:0862933233"><svg class="ic"><use href="#i-phone"/></svg>Đặt xe nhanh</a>
       </li>
-
-      <li class="price-card price-card--auto">
-        <span class="badge"><svg class="ic"><use href="#i-plane"/></svg></span>
-        <h3 class="price-card__title">SÂN BAY CÁT BI &amp; KHU VỰC LÂN CẬN</h3>
-        <p class="price-card__desc">Đón trả tại sân bay Cát Bi, Hải An và các khu vực khác thuộc Hải Phòng theo lịch trình và điểm hẹn.</p>
+      <li class="price-card price-card--auto price-card--cta price-card--other">
+        <span class="badge"><svg class="ic"><use href="#i-pin"/></svg></span>
+        <h3 class="price-card__title">CÁC NƠI KHÁC</h3>
+        <p class="price-card__desc">Cẩm Phả, Uông Bí, Quảng Yên, Vân Đồn... Gọi để xác nhận điểm đón và phụ phí (nếu có).</p>
+        <a id="cta-call-pickup-noi-khac-hl" class="pickup-cta" href="tel:0862933233"><svg class="ic"><use href="#i-phone"/></svg>Đặt xe nhanh</a>
       </li>
-
     </ul>
-
-    <div class="price-coverage-note">
-      <p>
-        <strong>Điểm đón của bạn chưa được liệt kê?</strong>
-        Chúng tôi phục vụ nhiều khu vực tại Hải Phòng và Hạ Long. Hãy liên hệ để xác nhận điểm đón, lịch trình và phụ phí (nếu có) trước khi đặt xe.
-      </p>
-      <p>
-        <a class="price-coverage-note__cta" href="tel:0862933233"><svg class="ic"><use href="#i-phone"/></svg>Gọi ngay để xác nhận điểm đón</a>
-      </p>
-    </div>
   </div>
 </section>
 
