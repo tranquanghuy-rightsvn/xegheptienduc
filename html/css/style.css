@@ -814,6 +814,7 @@ select.field__input{
 .price-card--cta{padding-bottom:18px}
 .price-card--cta .price-card__desc{margin-bottom:14px}
 .price-card--other{border-style:dashed;border-color:var(--gold)}
+.price-grid--pickup{row-gap:44px}
 .pickup-cta{
   display:inline-flex;align-items:center;gap:7px;margin-top:auto;padding:9px 20px;border-radius:999px;
   background:linear-gradient(180deg,#f7d78f 0%,#e3b155 48%,#c48c1e 100%);
