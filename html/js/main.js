@@ -90,6 +90,60 @@
     window.scrollTo({ top: top < 0 ? 0 : top, behavior: 'smooth' });
   });
 
+  /* ---------- 3b. Đo lường từng nút bấm ----------
+     Mỗi lượt bấm Gọi / Zalo / nút dẫn tới form "Đặt xe" gửi 2 nơi, kèm id nút + khu vực:
+       - GA4 (gtag gắn thẳng trên mọi trang, GTM KHÔNG có thẻ GA4 nên không bị đếm đôi):
+           call_click / zalo_click / book_click  - params cta_id, cta_section, cta_text
+       - dataLayer cho GTM -> Google Ads conversion:
+           event 'tienduc_contact', contact_type 'call' | 'zalo', cta_id, cta_section
+         (CỐ Ý không dùng chung tên 'tienduc_conversion' của form để trigger cũ của form
+         không bắn nhầm cho lượt gọi/Zalo.)
+     Nút nào chưa có id thì tự đặt tên theo khu vực ("auto-<khu vực>-call") để vẫn phân biệt
+     được - nhưng nên gắn id cta-* cố định cho nút mới để báo cáo không đổi tên theo layout.
+     Không preventDefault: tel:/zalo.me phải điều hướng ngay trong lượt click gốc (xem
+     ads-tracking.js), ping đo lường chỉ bắn song song. */
+  var lastBookCta = '';
+
+  function ctaSection(el) {
+    if (el.closest('.mobile-actionbar')) return 'mobile-bar';
+    if (el.closest('.callnow')) return 'floating';
+    if (el.closest('.site-header')) return 'header';
+    if (el.closest('.site-footer')) return 'footer';
+    if (el.closest('.promo-hero__form')) return 'hero-form';
+    if (el.closest('.promo-hero, .hero')) return 'hero';
+    var sec = el.closest('section[id]');
+    return sec ? sec.id : 'other';
+  }
+
+  function trackCta(type, el) {
+    var section = ctaSection(el);
+    var params = {
+      cta_id: el.id || ('auto-' + section + '-' + type),
+      cta_section: section,
+      cta_text: (el.innerText || el.getAttribute('aria-label') || '').replace(/\s+/g, ' ').trim().slice(0, 60)
+    };
+    if (typeof window.gtag === 'function') window.gtag('event', type + '_click', params);
+    if (type === 'call' || type === 'zalo') {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'tienduc_contact',
+        contact_type: type,
+        cta_id: params.cta_id,
+        cta_section: params.cta_section
+      });
+    }
+    return params;
+  }
+
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest('a[href^="tel:"], a[href*="zalo.me"], a[href="#dat-xe"]');
+    if (!link) return;
+    var href = link.getAttribute('href');
+    if (href.indexOf('tel:') === 0) trackCta('call', link);
+    else if (href === '#dat-xe') lastBookCta = trackCta('book', link).cta_id;
+    else trackCta('zalo', link);
+  }, true);
+
   /* ---------- 4. Form đặt xe / liên hệ ----------
      Validate cục bộ như cũ, sau đó gửi thật lên GAS doPost() qua fetch(). Content-Type
      text/plain (không phải application/json) để request ở lại dạng "simple request" —
@@ -229,6 +283,14 @@
               // Custom Event trigger chỉ nghe dataLayer.push, không nghe DOM CustomEvent ở trên).
               window.dataLayer = window.dataLayer || [];
               window.dataLayer.push({ event: 'tienduc_conversion', tienduc_type: apiAction });
+              // GA4: đơn gửi THÀNH CÔNG (khác lượt bấm nút gửi), kèm nút đã dẫn khách tới form
+              // (vd cta-book-mobilebar) - 'direct' nếu khách tự cuộn tới form.
+              if (typeof window.gtag === 'function') {
+                window.gtag('event', apiAction + '_success', {
+                  form_id: form.id,
+                  entry_cta: lastBookCta || 'direct'
+                });
+              }
             } else {
               msg.classList.add('is-error');
               /* Ưu tiên câu server trả về (vd "Số điện thoại không hợp lệ...", "Quý khách vui
