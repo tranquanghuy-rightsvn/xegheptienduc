@@ -527,6 +527,9 @@ select.field__input{
   background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%230d3b21' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 8px center/20px;
 }
 .booking__note{font-size:12.5px;font-weight:600;text-align:center;color:var(--on-dark-2)}
+.booking__reverse{margin-top:8px;padding-top:10px;border-top:1px solid rgba(216,164,65,.25);font-size:12.5px;text-align:center;color:var(--on-dark-2)}
+.booking__reverse a{font-weight:700;color:var(--gold-l)}
+.booking__reverse a:hover{text-decoration:underline}
 
 @media (max-width:900px){
   .promo-hero--lp{display:grid}
