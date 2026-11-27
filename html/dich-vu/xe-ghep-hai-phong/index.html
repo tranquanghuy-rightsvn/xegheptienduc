@@ -219,8 +219,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <main>
 
-<!-- ============ PROMO HERO — banner quảng cáo ============ -->
-<section class="promo-hero">
+<!-- ============ PROMO HERO — banner 2 cột như landing /lp/ ============
+     Trang SEO đang top: GIỮ NGUYÊN H1, title, meta, canonical, schema và toàn bộ H2/H3.
+     Chỉ đổi giao diện cho dễ tương tác: nút Gọi/Zalo + form đặt xe ngay trên banner
+     (desktop 2 cột, mobile form xếp ngay dưới ảnh). Style dùng chung .promo-hero--lp. -->
+<section class="promo-hero promo-hero--lp">
   <div class="promo-hero__media">
     <picture>
       <source media="(max-width: 700px)" type="image/webp" sizes="100vw"
@@ -240,23 +243,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
   <div class="promo-hero__inner container">
-    <h1 class="promo-hero__title">Xe Ghép <span class="promo-hero__route">Hải Phòng</span></h1>
-    <p class="promo-hero__badge">VÉ GHÉP CHỈ 250.000₫</p>
-    <ul class="promo-hero__checks">
-      <li><svg class="ic"><use href="#i-check"/></svg>Chạy liên tục</li>
-      <li><svg class="ic"><use href="#i-check"/></svg>Giá rẻ</li>
-      <li><svg class="ic"><use href="#i-check"/></svg>Đón tận nhà</li>
-      <li><svg class="ic"><use href="#i-check"/></svg>Trả tận nơi</li>
-    </ul>
-  </div>
-</section>
+    <div class="promo-hero__intro">
+      <h1 class="promo-hero__title">Xe Ghép <span class="promo-hero__route">Hải Phòng</span></h1>
+      <p class="promo-hero__badge">VÉ GHÉP CHỈ 250.000₫</p>
+      <ul class="promo-hero__checks">
+        <li><svg class="ic"><use href="#i-check"/></svg>Chạy liên tục</li>
+        <li><svg class="ic"><use href="#i-check"/></svg>Giá rẻ</li>
+        <li><svg class="ic"><use href="#i-check"/></svg>Đón tận nhà</li>
+        <li><svg class="ic"><use href="#i-check"/></svg>Trả tận nơi</li>
+      </ul>
+      <div class="promo-hero__cta">
+        <a id="cta-call-hero" class="btn btn--gold promo-hero__btn" href="tel:0862933233">
+          <svg class="ic"><use href="#i-phone"/></svg><span class="promo-hero__btn-long">Gọi 0862 933 233</span><span class="promo-hero__btn-short">Gọi đặt xe</span>
+        </a>
+        <a id="cta-zalo-hero" class="btn promo-hero__btn promo-hero__btn--zalo" href="https://zalo.me/0862933233" target="_blank" rel="noopener">
+          <img class="ic" src="../../images/zalo-icon.webp" alt="" width="20" height="20">Chat Zalo
+        </a>
+      </div>
+      <p class="promo-hero__addr">
+        <svg class="ic"><use href="#i-pin"/></svg>
+        <span><b>Nhà Xe Tiến Đức</b> – Hotline/Zalo 0862 933 233, hỗ trợ 24/7</span>
+      </p>
+    </div>
 
-<!-- ============ ĐẶT XE NGAY ============ -->
-<section class="section section--tight" id="dat-xe">
-  <div class="container duo duo--solo">
-    <div class="panel">
-      <h2 class="panel__title">ĐẶT XE NGAY</h2>
-
+    <!-- HẸN GIỜ ĐÓN (form hẹn giờ; đi ngay thì bấm Gọi/Zalo) — giữ đủ 5 trường (backend GAS bắt buộc cả 5); "Số người" là select
+         mặc định 1 người, đi cùng hàng với "Thời gian" trên mobile cho form ngắn lại. -->
+    <div class="panel promo-hero__form" id="dat-xe">
+      <h2 class="panel__title">HẸN GIỜ ĐÓN</h2>
       <form class="booking" id="booking-form" novalidate data-api-action="booking">
         <input class="hp-field" type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="booking__box">
@@ -274,23 +287,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <ul class="autocomplete-list" id="f-drop-list" role="listbox" hidden></ul>
             </div>
           </div>
-          <div class="field">
-            <label class="field__label" for="f-time"><svg class="ic"><use href="#i-calendar"/></svg>Thời gian đi</label>
-            <input class="field__input" id="f-time" name="time" type="text" placeholder="Chọn ngày giờ" onfocus="this.type = 'datetime-local'" onblur="if (!this.value) this.type = 'text';" required>
-          </div>
-          <div class="field">
-            <label class="field__label" for="f-people"><svg class="ic"><use href="#i-user"/></svg>Số lượng người</label>
-            <input class="field__input" id="f-people" name="people" type="number" min="1" max="45" placeholder="Nhập số lượng người" required>
+          <div class="field-row">
+            <div class="field">
+              <label class="field__label" for="f-time"><svg class="ic"><use href="#i-calendar"/></svg>Thời gian đi</label>
+              <input class="field__input" id="f-time" name="time" type="text" placeholder="Chọn ngày giờ" onfocus="this.type = 'datetime-local'" onblur="if (!this.value) this.type = 'text';" required>
+            </div>
+            <div class="field">
+              <label class="field__label" for="f-people"><svg class="ic"><use href="#i-user"/></svg>Số người</label>
+              <select class="field__input" id="f-people" name="people" required>
+                <option value="1" selected>1 người</option>
+                <option value="2">2 người</option>
+                <option value="3">3 người</option>
+                <option value="4">4 người</option>
+                <option value="5">5 người</option>
+                <option value="6">6 người</option>
+                <option value="7">7 người</option>
+                <option value="Trên 7 người">Trên 7 người</option>
+              </select>
+            </div>
           </div>
           <div class="field">
             <label class="field__label" for="f-phone"><svg class="ic"><use href="#i-phone"/></svg>Số điện thoại</label>
-            <input class="field__input" id="f-phone" name="phone" type="tel" placeholder="Nhập số điện thoại" required>
+            <input class="field__input" id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Nhập số điện thoại" required>
           </div>
         </div>
-
         <button id="booking-submit" class="btn btn--gold btn--block" type="submit">
           GỬI YÊU CẦU ĐẶT XE <svg class="ic"><use href="#i-send"/></svg>
         </button>
+        <p class="booking__note">Tiến Đức gọi lại xác nhận trong ít phút</p>
         <p class="booking__msg" id="booking-msg" role="status"></p>
       </form>
     </div>
@@ -305,30 +329,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p class="price-sub">Xe ghép Hải Phòng — giá 1 chiều</p>
 
     <ul class="price-grid price-grid--4">
-      <li class="price-card price-card--pro">
+      <li class="price-card price-card--pro price-card--auto price-card--cta">
         <span class="badge"><svg class="ic"><use href="#i-ticket"/></svg></span>
         <span class="price-card__flag">TIẾT KIỆM</span>
         <h3 class="price-card__title">VÉ GHÉP</h3>
         <p class="price-card__amount">250.000<span>đ</span></p>
         <p class="price-card__desc">Ghép chung xe, đón tận nhà nội thành Hải Phòng</p>
+        <a id="cta-call-price-ve-ghep" class="pickup-cta" href="tel:0862933233"><svg class="ic"><use href="#i-phone"/></svg>Đặt vé ghép</a>
       </li>
-      <li class="price-card">
+      <li class="price-card price-card--auto price-card--cta">
         <span class="badge"><svg class="ic"><use href="#i-pin"/></svg></span>
         <h3 class="price-card__title">GHÉP NGOẠI THÀNH</h3>
         <p class="price-card__amount">300.000<span>đ</span></p>
         <p class="price-card__desc">Đón tại Thủy Nguyên, Kiến An, Đồ Sơn, An Dương</p>
+        <a id="cta-call-price-ngoai-thanh" class="pickup-cta" href="tel:0862933233"><svg class="ic"><use href="#i-phone"/></svg>Đặt vé ngoại thành</a>
       </li>
-      <li class="price-card">
+      <li class="price-card price-card--auto price-card--cta">
         <span class="badge"><svg class="ic"><use href="#i-car"/></svg></span>
         <h3 class="price-card__title">BAO XE 5 CHỖ</h3>
         <p class="price-card__amount">400.000<span>đ</span></p>
         <p class="price-card__desc">Xe riêng không ghép khách, chủ động giờ đi</p>
+        <a id="cta-call-price-bao-xe-5" class="pickup-cta" href="tel:0862933233"><svg class="ic"><use href="#i-phone"/></svg>Đặt xe 5 chỗ</a>
       </li>
-      <li class="price-card">
+      <li class="price-card price-card--auto price-card--cta">
         <span class="badge"><svg class="ic"><use href="#i-users"/></svg></span>
         <h3 class="price-card__title">BAO XE 7 CHỖ</h3>
         <p class="price-card__amount">500.000<span>đ</span></p>
         <p class="price-card__desc">Xe riêng rộng rãi cho gia đình, nhóm bạn</p>
+        <a id="cta-call-price-bao-xe-7" class="pickup-cta" href="tel:0862933233"><svg class="ic"><use href="#i-phone"/></svg>Đặt xe 7 chỗ</a>
       </li>
     </ul>
 
@@ -338,7 +366,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <h3 class="notice__title">LƯU Ý QUAN TRỌNG</h3>
       </div>
       <p class="notice__text">
-        <b>Giá áp dụng cho điểm đón trong nội thành Hải Phòng.</b> Điểm đón - trả xa hơn (huyện ngoại thành, các tỉnh lân cận...) sẽ có phụ phí theo khoảng cách. Vui lòng liên hệ để được báo giá chính xác trước khi đặt xe.
+        <b>Giá áp dụng cho điểm đón trong nội thành Hải Phòng.</b> Điểm đón - trả xa hơn (huyện ngoại thành, các tỉnh lân cận...) sẽ có phụ phí theo khoảng cách. Vui lòng liên hệ <a id="cta-call-price-notice" href="tel:0862933233"><b>0862 933 233</b></a> để được báo giá chính xác trước khi đặt xe.
       </p>
     </div>
   </div>
@@ -351,26 +379,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="ornament" aria-hidden="true"></span>
     <p class="price-sub">Đón - trả tận nơi khắp nội thành và ngoại thành Hải Phòng</p>
 
-    <ul class="price-grid price-grid--4">
-      <li class="price-card">
+    <ul class="price-grid price-grid--4 price-grid--pickup">
+      <li class="price-card price-card--auto price-card--cta">
         <span class="badge"><svg class="ic"><use href="#i-pin"/></svg></span>
         <h3 class="price-card__title">LÊ CHÂN - NGÔ QUYỀN - HỒNG BÀNG</h3>
         <p class="price-card__desc">Đón tận nhà, cơ quan, khách sạn nội thành</p>
+        <a id="cta-call-pickup-noi-thanh-1" class="pickup-cta" href="tel:0862933233"><svg class="ic"><use href="#i-phone"/></svg>Đặt xe nhanh</a>
       </li>
-      <li class="price-card">
+      <li class="price-card price-card--auto price-card--cta">
         <span class="badge"><svg class="ic"><use href="#i-pin"/></svg></span>
         <h3 class="price-card__title">HẢI AN - KIẾN AN - DƯƠNG KINH</h3>
         <p class="price-card__desc">Đón tận nơi, không cần ra bến xe</p>
+        <a id="cta-call-pickup-noi-thanh-2" class="pickup-cta" href="tel:0862933233"><svg class="ic"><use href="#i-phone"/></svg>Đặt xe nhanh</a>
       </li>
-      <li class="price-card">
+      <li class="price-card price-card--auto price-card--cta">
         <span class="badge"><svg class="ic"><use href="#i-pin"/></svg></span>
         <h3 class="price-card__title">THỦY NGUYÊN - AN DƯƠNG</h3>
         <p class="price-card__desc">Đón tận nhà ngoại thành, phụ phí theo km</p>
+        <a id="cta-call-pickup-thuy-nguyen" class="pickup-cta" href="tel:0862933233"><svg class="ic"><use href="#i-phone"/></svg>Đặt xe nhanh</a>
       </li>
-      <li class="price-card">
+      <li class="price-card price-card--auto price-card--cta">
         <span class="badge"><svg class="ic"><use href="#i-pin"/></svg></span>
         <h3 class="price-card__title">ĐỒ SƠN - KIẾN THỤY</h3>
         <p class="price-card__desc">Khu du lịch, khu dân cư ven biển, phụ phí theo km</p>
+        <a id="cta-call-pickup-do-son" class="pickup-cta" href="tel:0862933233"><svg class="ic"><use href="#i-phone"/></svg>Đặt xe nhanh</a>
       </li>
     </ul>
   </div>
@@ -560,7 +592,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <svg class="ic"><use href="#i-phone"/></svg>
     <span>Gọi xe ngay</span>
   </a>
-  <a class="mobile-actionbar__item mobile-actionbar__item--book" href="#dat-xe" aria-label="Đặt xe">
+  <a id="cta-book-mobilebar" class="mobile-actionbar__item mobile-actionbar__item--book" href="#dat-xe" aria-label="Đặt xe">
     <svg class="ic"><use href="#i-car"/></svg>
     <span>Đặt xe</span>
   </a>
